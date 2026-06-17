@@ -26,7 +26,7 @@ function setup() {
 }
 
 function draw() {
-  background(250);
+  clear();
 
   let cx = width / 2;
   let cy = height / 2 - 20;
