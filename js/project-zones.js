@@ -9,6 +9,7 @@ let draggedZone = null;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
+   clear();
   textAlign(CENTER, CENTER);
   textFont("Arial");
 
@@ -28,9 +29,6 @@ function setup() {
 function draw() {
   clear();
 
-  let cx = width / 2;
-  ...
-}
 
   let cx = width / 2;
   let cy = height / 2 - 20;
