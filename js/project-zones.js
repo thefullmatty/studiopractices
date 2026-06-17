@@ -29,6 +29,10 @@ function draw() {
   clear();
 
   let cx = width / 2;
+  ...
+}
+
+  let cx = width / 2;
   let cy = height / 2 - 20;
   let siteSize = min(width, height) * 0.65;
   let zoneSize = 130;
