@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      font-family: Arial, sans-serif;
+      color: #000;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    #sketch-holder {
+      width: 100%;
+      height: 68vh;
+      min-height: 500px;
+      background: transparent;
+    }
+
+    canvas {
+      display: block;
+      background: transparent !important;
+      touch-action: none;
+    }
+
+    #controls {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px 24px 32px 24px;
+      font-size: 14px;
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0 auto 18px auto;
+      text-align: center;
+      line-height: 1.4;
+    }
+
+    .input-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      font-size: 13px;
+      letter-spacing: 0.02em;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 70px;
+      box-sizing: border-box;
+      resize: vertical;
+      border: 1px solid #000;
+      background: transparent;
+      padding: 10px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      line-height: 1.35;
+      color: #000;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+    }
+
+    button {
+      border: 1px solid #000;
+      background: transparent;
+      color: #000;
+      padding: 9px 14px;
+      font-family: Arial, sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    @media (max-width: 700px) {
+      #sketch-holder {
+        height: 60vh;
+        min-height: 420px;
+      }
+
+      .input-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="sketch-holder"></div>
+
+  <div id="controls">
+    <div class="intro">
+      Type or paste your own site, action, documentation method and journal response.
+      Then hover over the circles to see your practice cycle appear beneath the diagram.
+    </div>
+
+    <div class="input-grid">
+      <div class="field">
+        <label for="siteInput">Site / inquiry / question / place</label>
+        <textarea id="siteInput" placeholder="e.g. Rapid Creek, sediment, a question about erosion, a memory of a place..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="activityInput">Studio Activity</label>
+        <textarea id="activityInput" placeholder="e.g. Repeat one action at three different speeds..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="documentationInput">Documentation</label>
+        <textarea id="documentationInput" placeholder="e.g. Photograph each stage from the same position..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="journalInput">Journal</label>
+        <textarea id="journalInput" placeholder="e.g. What changed, resisted, failed, or became visible?"></textarea>
+      </div>
+    </div>
+
+    <div class="buttons">
+      <button onclick="updateCycle()">Update diagram</button>
+      <button onclick="randomiseCycle()">Randomise suggestions</button>
+      <button onclick="clearCycle()">Clear</button>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
+  <script src="/js/site-cycle-builder.js"></script>
+</body>
+</html>
