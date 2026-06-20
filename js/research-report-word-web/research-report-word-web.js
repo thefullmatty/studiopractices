@@ -81,7 +81,7 @@ function setup() {
   pixelDensity(Math.min(window.devicePixelRatio || 1, 2));
 
   // A clean, slightly technical sans-serif stack without becoming monospaced.
-  textFont("Inter, Avenir Next, Avenir, Helvetica Neue, Arial, sans-serif");
+  textFont("Arial");
   textAlign(CENTER, CENTER);
   strokeCap(ROUND);
 
