@@ -87,8 +87,8 @@ function draw() {
   clear();
 
   let cx = width / 2;
-  let cy = height / 2 - 10;
-  let siteSize = min(width, height) * 0.72;
+  let cy = height / 2 + 10;
+  let siteSize = min(width, height) * 0.74;
   let zoneSize = min(width, height) * 0.18;
   zoneSize = constrain(zoneSize, 105, 135);
 
