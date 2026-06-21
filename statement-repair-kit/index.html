@@ -170,23 +170,26 @@ body {
     }
 
     .action-button {
-      border: 1.5px solid var(--line);
-      background: var(--text);
-      color: var(--bg);
-      padding: 10px 14px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-size: 0.95rem;
-    }
+  border: 1.5px solid var(--line);
+  background: transparent;
+  color: var(--text);
+  padding: 10px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 0.95rem;
+}
 
-    .action-button.secondary {
-      background: transparent;
-      color: var(--text);
-    }
+.action-button.secondary {
+  background: transparent;
+  color: var(--text);
+}
 
-    .action-button:hover {
-      opacity: 0.85;
-    }
+.action-button:hover {
+  background: rgba(23, 23, 23, 0.08);
+  color: var(--text);
+  opacity: 1;
+}
+
 
     .status {
       min-height: 22px;
