@@ -8,23 +8,43 @@ const repairData = {
     entries: [
       {
         avoid: "This artwork is about nature.",
-        instead: "This work presents ___ through ___, drawing attention to ___."
+        instead: "The viewer encounters ___, shown through ___, ___, and ___."
       },
       {
         avoid: "This is a painting I made for my project.",
-        instead: "This work is a ___ that uses ___, ___, and ___ to create a sense of ___."
+        instead: "This work is a ___ made from/with ___, presented as ___."
       },
       {
         avoid: "My work shows emotions.",
-        instead: "The work uses ___, ___, and ___ to create a feeling of ___."
+        instead: "The work creates a feeling of ___ through its use of ___, ___, and ___."
       },
       {
         avoid: "This artwork is about my life.",
-        instead: "The viewer encounters ___, shaped by personal references to ___ and ___."
+        instead: "The viewer first meets ___, which draws on personal references to ___ and ___."
       },
       {
         avoid: "I wanted to make something beautiful.",
-        instead: "The work invites the viewer to notice ___ through its use of ___, ___, and ___."
+        instead: "The work invites attention to ___ through qualities of ___, ___, and ___."
+      },
+      {
+        avoid: "This piece represents my ideas.",
+        instead: "The work brings together ___ and ___ to create an encounter with ___."
+      },
+      {
+        avoid: "This work is very personal to me.",
+        instead: "The work presents ___ in a way that suggests ___ without explaining it directly."
+      },
+      {
+        avoid: "This artwork shows a scene.",
+        instead: "The work stages ___, where ___ appears to be happening, shifting, or unfolding."
+      },
+      {
+        avoid: "This piece is abstract.",
+        instead: "The work uses abstraction through ___, ___, and ___ to direct attention toward ___."
+      },
+      {
+        avoid: "This installation fills the space.",
+        instead: "The viewer moves through/around ___, encountering ___ in relation to ___ and ___."
       }
     ]
   },
@@ -35,15 +55,15 @@ const repairData = {
     entries: [
       {
         avoid: "I wanted to make something interesting.",
-        instead: "I wanted to investigate how ___ can change the way we understand ___."
+        instead: "I wanted to investigate how ___ changes the way we understand ___."
       },
       {
         avoid: "I chose this topic because I like it.",
-        instead: "The work began from my interest in ___, especially the way it connects to ___."
+        instead: "The work began from my interest in ___, especially its connection to ___."
       },
       {
         avoid: "My work is about identity.",
-        instead: "This work explores how identity can be shaped by ___, ___, and ___."
+        instead: "The work asks how identity is shaped by ___, ___, and ___."
       },
       {
         avoid: "This artwork shows my journey.",
@@ -51,7 +71,27 @@ const repairData = {
       },
       {
         avoid: "I wanted to express myself.",
-        instead: "I used this work to test how ___ could communicate feelings of ___ without relying on ___."
+        instead: "I used the work to test how ___ could communicate ___ without relying on ___."
+      },
+      {
+        avoid: "I wanted to explore a theme.",
+        instead: "The work explores the tension between ___ and ___."
+      },
+      {
+        avoid: "This project is about connection.",
+        instead: "The work investigates how connection is formed, interrupted, or remembered through ___."
+      },
+      {
+        avoid: "I wanted to raise awareness.",
+        instead: "The work draws attention to ___ by focusing on ___ rather than ___."
+      },
+      {
+        avoid: "I wanted to tell a story.",
+        instead: "The work traces a movement from ___ to ___, suggesting a story of ___."
+      },
+      {
+        avoid: "I wanted to make people think.",
+        instead: "The work poses a question about ___ by placing ___ in relation to ___."
       }
     ]
   },
@@ -79,6 +119,26 @@ const repairData = {
       {
         avoid: "I used these materials because they looked good.",
         instead: "The materials matter because ___ suggests ___, while ___ creates a sense of ___."
+      },
+      {
+        avoid: "I tried different techniques.",
+        instead: "I moved between ___ and ___ to find a method that could hold ___."
+      },
+      {
+        avoid: "The work took a long time to make.",
+        instead: "The slow process of ___ allowed ___ to accumulate, change, or become visible."
+      },
+      {
+        avoid: "I used found materials.",
+        instead: "The use of found materials brings traces of ___ into the work."
+      },
+      {
+        avoid: "I documented my process.",
+        instead: "Documentation became part of the work by showing ___, ___, and ___."
+      },
+      {
+        avoid: "I changed my mind during the project.",
+        instead: "A shift from ___ to ___ changed the direction of the work and sharpened my focus on ___."
       }
     ]
   },
@@ -105,7 +165,27 @@ const repairData = {
       },
       {
         avoid: "It comes from my memories.",
-        instead: "The work emerges from memories of ___, using ___ to create a connection between ___ and ___."
+        instead: "The work emerges from memories of ___, using ___ to connect ___ and ___."
+      },
+      {
+        avoid: "This work is inspired by my childhood.",
+        instead: "The work returns to ___ as a way of thinking about ___ from the present."
+      },
+      {
+        avoid: "This work connects to place.",
+        instead: "The work is situated in relation to ___, where ___ shapes the way ___ is experienced."
+      },
+      {
+        avoid: "I researched this topic.",
+        instead: "Research into ___ informed my decisions about ___, ___, and ___."
+      },
+      {
+        avoid: "This work is contemporary.",
+        instead: "The work sits within contemporary conversations about ___, particularly through its use of ___."
+      },
+      {
+        avoid: "This work is influenced by history.",
+        instead: "The work draws on histories of ___ to reconsider ___ in the present."
       }
     ]
   },
@@ -133,6 +213,26 @@ const repairData = {
       {
         avoid: "I hope people think differently.",
         instead: "The work asks viewers to reconsider ___ by paying attention to ___."
+      },
+      {
+        avoid: "I want the audience to know what I went through.",
+        instead: "The work does not explain the full experience, but leaves traces of ___ for the viewer to encounter."
+      },
+      {
+        avoid: "I hope my work inspires people.",
+        instead: "The work opens a space for viewers to think about their own relationship to ___."
+      },
+      {
+        avoid: "I want people to see the meaning.",
+        instead: "The meaning of the work emerges through the relationship between ___, ___, and ___."
+      },
+      {
+        avoid: "This work is open to interpretation.",
+        instead: "The work leaves room for different readings by holding ___ and ___ in tension."
+      },
+      {
+        avoid: "I am proud of the final result.",
+        instead: "The completed work shows a shift in my practice from ___ toward ___."
       }
     ]
   }
