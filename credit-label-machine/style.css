@@ -21,3 +21,8 @@ color:#000;}
   #paper-output em{ font-style:italic; }
   .toast{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:#111; color:#fff; padding:8px 12px; border-radius:999px; font-size:14px; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
+  button,
+input {
+  pointer-events: auto;
+  z-index: 50;
+}
