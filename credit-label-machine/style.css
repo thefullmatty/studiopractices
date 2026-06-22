@@ -1,14 +1,13 @@
   :root{ --w:997.81; --h:935.33; }
   *{box-sizing:border-box}
-  body{ margin:0; padding:24px; background:transparent; font-family:Arial, Helvetica, sans-serif; }
+  body{ margin:0; padding:24px; background:#f3f3f3; font-family:Arial, Helvetica, sans-serif; }
   .machine{ position:relative; width:min(100%, 998px); aspect-ratio:997.81/935.33; margin:auto; }
   .layer{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; user-select:none; }
-  .hot{ position:absolute; transform:translateZ(0); font-family:Arial, Helvetica, sans-serif; background:transparent;
-color:#000;}
-  input.hot{ border:0; background:transparent; color:#000; outline:none; padding:0 16px; font-size:18px; line-height:1; }
+  .hot{ position:absolute; transform:translateZ(0); font-family:Arial, Helvetica, sans-serif; }
+  input.hot{ border:0; background:transparent; outline:none; padding:0 16px; font-size:18px; line-height:1; }
   input.hot:focus{ box-shadow: inset 0 0 0 2px rgba(0,0,0,.18); border-radius:12px; }
   input.small{ text-align:center; padding:0 8px; }
-  .btn{ border:0; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; color:#000; }
+  .btn{ border:0; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; color:transparent; }
   .choice{ border:0; background:transparent; cursor:pointer; }
   .choice.selected::after{ content:""; position:absolute; left:50%; top:50%; width:16px; height:16px; background:#000; border-radius:50%; transform:translate(-50%,-50%); }
   .mode{ border:0; background:transparent; cursor:pointer; }
@@ -21,8 +20,3 @@ color:#000;}
   #paper-output em{ font-style:italic; }
   .toast{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:#111; color:#fff; padding:8px 12px; border-radius:999px; font-size:14px; opacity:0; transition:opacity .2s; }
   .toast.show{ opacity:1; }
-  button,
-input {
-  pointer-events: auto;
-  z-index: 50;
-}
