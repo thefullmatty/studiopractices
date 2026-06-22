@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_04_sections_shadow" data-name="Layer 04 sections shadow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 997.81 935.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #686868;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="69.3" y="172.2" width="593.43" height="494.99" rx="12" ry="12"/>
+  <rect class="cls-1" x="674.72" y="172.2" width="255.79" height="494.99" rx="12" ry="12"/>
+  <rect class="cls-1" x="69.3" y="62.09" width="593.43" height="93.15" rx="12" ry="12"/>
+  <rect class="cls-1" x="674.72" y="62.09" width="255.79" height="93.15" rx="12" ry="12"/>
+</svg>

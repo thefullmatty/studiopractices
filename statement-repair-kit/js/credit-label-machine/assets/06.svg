@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_06_Input_and_buttons_shadow" data-name="Layer 06 Input and buttons shadow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 997.81 935.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #b3b3b3;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="248.92" y="181.52" width="386.36" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="268.93" y="417.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="402.33" y="417.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="525.24" y="417.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="525.24" y="474.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="402.33" y="474.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="525.24" y="531.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="402.33" y="531.57" width="79.55" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="248.92" y="295.53" width="386.36" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="248.92" y="356.55" width="386.36" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="248.92" y="238.52" width="386.36" height="47.73" rx="12" ry="12"/>
+  <circle class="cls-1" cx="107.22" cy="498.43" r="14.2"/>
+  <circle class="cls-1" cx="107.22" cy="550.78" r="14.2"/>
+  <circle class="cls-1" cx="106.48" cy="626.08" r="14.2"/>
+  <circle class="cls-1" cx="419.23" cy="626.08" r="14.2"/>
+  <rect class="cls-1" x="706.68" y="229.25" width="194.85" height="75.94" rx="12" ry="12"/>
+  <rect class="cls-1" x="706.68" y="327.68" width="194.85" height="75.94" rx="12" ry="12"/>
+  <rect class="cls-1" x="706.68" y="487.98" width="194.85" height="75.94" rx="12" ry="12"/>
+  <rect class="cls-1" x="706.68" y="589.11" width="93.75" height="47.73" rx="12" ry="12"/>
+  <rect class="cls-1" x="807.78" y="589.11" width="93.75" height="47.73" rx="12" ry="12"/>
+</svg>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_09_printer_slot_and_paper" data-name="Layer 09 printer slot and paper" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 997.81 935.33">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #fff;
+        stroke: #000;
+      }
+
+      .cls-1, .cls-2 {
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-2 {
+        fill: none;
+        stroke: #e8e8e8;
+        stroke-width: 3px;
+      }
+    </style>
+  </defs>
+  <rect class="cls-1" x="112.47" y="714.9" width="772.86" height="208.71"/>
+  <line class="cls-2" x1="112.47" y1="710.21" x2="885.33" y2="710.21"/>
+</svg>
