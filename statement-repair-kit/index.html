@@ -210,6 +210,33 @@ body {
   padding-right: 10px;
 }
 
+    .draft h2 {
+      margin: 0 0 14px 0;
+      font-size: 1.8rem;
+      letter-spacing: -0.03em;
+    }
+
+    .draft-section {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 16px;
+      border-top: 1px solid var(--soft);
+      padding: 14px 0;
+    }
+
+    .draft-section:first-of-type {
+      border-top: none;
+    }
+
+    .draft-heading {
+      font-weight: 800;
+    }
+
+    .draft-text.empty {
+      color: var(--muted);
+      font-style: italic;
+    }
+
     @media (max-width: 740px) {
       body {
         padding: 18px;
