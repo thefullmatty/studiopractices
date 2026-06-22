@@ -1,6 +1,6 @@
   :root{ --w:997.81; --h:935.33; }
   *{box-sizing:border-box}
-  body{ margin:0; padding:24px; background:#f3f3f3; font-family:Arial, Helvetica, sans-serif; }
+  body{ margin:0; padding:24px; background:transparent; font-family:Arial, Helvetica, sans-serif; }
   .machine{ position:relative; width:min(100%, 998px); aspect-ratio:997.81/935.33; margin:auto; }
   .layer{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; user-select:none; }
   .hot{ position:absolute; transform:translateZ(0); font-family:Arial, Helvetica, sans-serif; }
