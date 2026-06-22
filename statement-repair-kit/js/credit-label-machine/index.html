@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Credit Your Work</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="machine" id="machine" aria-label="Credit your work label machine">
+  <img class="layer" src="assets/01.svg" alt="">
+  <img class="layer" src="assets/02.svg" alt="">
+  <img class="layer" src="assets/03.svg" alt="">
+  <img class="layer" src="assets/04.svg" alt="">
+  <img class="layer" src="assets/05.svg" alt="">
+  <img class="layer" src="assets/06.svg" alt="">
+  <img class="layer" src="assets/07.svg" alt="">
+  <img class="layer" src="assets/08.svg" alt="">
+  <img class="layer" src="assets/09.svg" alt="">
+  <img class="layer" src="assets/10.svg" alt="">
+
+  <input class="hot" id="artist" aria-label="artist name" style="left:24.46%;top:18.91%;width:38.72%;height:5.10%" />
+  <input class="hot" id="title" aria-label="title" style="left:24.46%;top:25.00%;width:38.72%;height:5.10%;font-style:italic" />
+  <input class="hot" id="year" aria-label="year" style="left:24.46%;top:31.10%;width:38.72%;height:5.10%" />
+  <input class="hot" id="materials" aria-label="medium/materials" style="left:24.46%;top:37.62%;width:38.72%;height:5.10%" />
+  <input class="hot small" id="height" aria-label="height in centimetres" style="left:26.47%;top:44.14%;width:7.97%;height:5.10%" />
+  <input class="hot small" id="width" aria-label="width in centimetres" style="left:39.84%;top:44.14%;width:7.97%;height:5.10%" />
+  <input class="hot small" id="depth" aria-label="depth in centimetres" style="left:52.16%;top:44.14%;width:7.97%;height:5.10%" />
+  <input class="hot small" id="minutes" aria-label="duration minutes" style="left:39.84%;top:50.24%;width:7.97%;height:5.10%" />
+  <input class="hot small" id="seconds" aria-label="duration seconds" style="left:52.16%;top:50.24%;width:7.97%;height:5.10%" />
+  <input class="hot small" id="editionNo" aria-label="edition number" style="left:39.84%;top:56.34%;width:7.97%;height:5.10%" />
+  <input class="hot small" id="editionOf" aria-label="edition of" style="left:52.16%;top:56.34%;width:7.97%;height:5.10%" />
+
+  <button class="choice hot" id="toggleDuration" aria-label="include duration" style="left:8.84%;top:51.28%;width:2.85%;height:3.04%"></button>
+  <button class="choice hot" id="toggleEdition" aria-label="include edition" style="left:8.84%;top:56.88%;width:2.85%;height:3.04%"></button>
+  <button class="choice hot" id="toggleCopyright" aria-label="include copyright line" style="left:8.77%;top:64.92%;width:2.85%;height:3.04%"></button>
+  <button class="choice hot" id="toggleCourtesy" aria-label="include courtesy of the artist" style="left:40.12%;top:64.92%;width:2.85%;height:3.04%"></button>
+
+  <button class="mode hot selected" id="modeOneLine" aria-label="one line output" style="left:70.39%;top:24.07%;width:19.43%;height:8.01%"></button>
+  <button class="mode hot" id="modeStacked" aria-label="stacked output" style="left:70.39%;top:34.59%;width:19.43%;height:8.01%"></button>
+  <button class="btn hot" id="printBtn" aria-label="print credit line" style="left:70.39%;top:51.73%;width:19.43%;height:8.01%">PRINT</button>
+  <button class="btn hot" id="copyBtn" aria-label="copy credit line" style="left:70.34%;top:62.49%;width:9.40%;height:5.10%">copy</button>
+  <button class="btn hot" id="clearBtn" aria-label="clear all fields" style="left:80.47%;top:62.49%;width:9.40%;height:5.10%">clear</button>
+
+  <div id="paper-output" aria-live="polite"></div>
+</div>
+<div id="toast" class="toast">Copied</div>
+<script src="script.js"></script>
+</body>
+</html>
