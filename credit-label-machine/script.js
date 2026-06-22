@@ -56,31 +56,26 @@ function printCredit(){
     out.innerHTML = `<div class="stack">${lines.join('<br>')}</div>`;
   }
 }
-async function copyCredit() {
-  const text = buildCreditText().plain;
+function copyCredit() {
+  if (!plainCredit) printCredit();
 
-  try {
-    await navigator.clipboard.writeText(text);
-    toast("Copied");
-  } catch (err) {
-    const temp = document.createElement("textarea");
-    temp.value = text;
-    temp.setAttribute("readonly", "");
-    temp.style.position = "fixed";
-    temp.style.left = "-9999px";
-    document.body.appendChild(temp);
-    temp.select();
+  const text = plainCredit;
+  const temp = document.createElement("textarea");
 
-    try {
-      document.execCommand("copy");
-      toast("Copied");
-    } catch (fallbackErr) {
-      toast("Copy failed");
-    }
+  temp.value = text;
+  temp.setAttribute("readonly", "");
+  temp.style.position = "fixed";
+  temp.style.left = "-9999px";
 
-    document.body.removeChild(temp);
-  }
+  document.body.appendChild(temp);
+  temp.select();
+
+  const success = document.execCommand("copy");
+  document.body.removeChild(temp);
+
+  showToast(success ? "Copied" : "Copy failed");
 }
+
 function clearAll(){
   document.querySelectorAll('input').forEach(i => i.value = '');
   toggles.forEach(id => $(id).classList.remove('selected'));
