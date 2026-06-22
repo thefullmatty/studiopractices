@@ -56,10 +56,30 @@ function printCredit(){
     out.innerHTML = `<div class="stack">${lines.join('<br>')}</div>`;
   }
 }
-async function copyCredit(){
-  if(!plainCredit) printCredit();
-  try{ await navigator.clipboard.writeText(plainCredit); showToast('Copied'); }
-  catch(e){ showToast('Copy failed'); }
+async function copyCredit() {
+  const text = buildCreditText().plain;
+
+  try {
+    await navigator.clipboard.writeText(text);
+    toast("Copied");
+  } catch (err) {
+    const temp = document.createElement("textarea");
+    temp.value = text;
+    temp.setAttribute("readonly", "");
+    temp.style.position = "fixed";
+    temp.style.left = "-9999px";
+    document.body.appendChild(temp);
+    temp.select();
+
+    try {
+      document.execCommand("copy");
+      toast("Copied");
+    } catch (fallbackErr) {
+      toast("Copy failed");
+    }
+
+    document.body.removeChild(temp);
+  }
 }
 function clearAll(){
   document.querySelectorAll('input').forEach(i => i.value = '');
