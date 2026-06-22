@@ -1,22 +1,159 @@
-  :root{ --w:997.81; --h:935.33; }
-  *{box-sizing:border-box}
-  body{ margin:0; padding:24px; background:transparent; font-family:Arial, Helvetica, sans-serif; }
-  .machine{ position:relative; width:min(100%, 998px); aspect-ratio:997.81/935.33; margin:auto; }
-  .layer{ position:absolute; inset:0; width:100%; height:100%; pointer-events:none; user-select:none; }
-  .hot{ position:absolute; transform:translateZ(0); font-family:Arial, Helvetica, sans-serif; }
-  input.hot{ border:0; background:#000; outline:none; padding:0 16px; font-size:18px; line-height:1; }
-  input.hot:focus{ box-shadow: inset 0 0 0 2px rgba(0,0,0,.18); border-radius:12px; }
-  input.small{ text-align:center; padding:0 8px; }
-  .btn{ border:0; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; color:#000; }
-  .choice{ border:0; background:transparent; cursor:pointer; }
-  .choice.selected::after{ content:""; position:absolute; left:50%; top:50%; width:16px; height:16px; background:#000; border-radius:50%; transform:translate(-50%,-50%); }
-  .mode{ border:0; background:transparent; cursor:pointer; }
-  .mode.selected{ box-shadow: inset 0 0 0 3px rgba(0,0,0,.22); border-radius:12px; }
-  #paper-output{ position:absolute; left:11.27%; top:76.43%; width:77.46%; height:22.31%; padding:34px 54px; font-size:19px; line-height:1.35; color:#000; overflow:hidden; display:flex; align-items:center; justify-content:center; text-align:center; pointer-events:none; }
-  #paper-output.stacked{ justify-content:center; text-align:left; }
-  #paper-output .line{ width:100%; max-width:86%; }
-  #paper-output .stack{ min-width:58%; max-width:88%; }
-  #paper-output .piece{ white-space:nowrap; }
-  #paper-output em{ font-style:italic; }
-  .toast{ position:fixed; left:50%; bottom:24px; transform:translateX(-50%); background:#111; color:#fff; padding:8px 12px; border-radius:999px; font-size:14px; opacity:0; transition:opacity .2s; }
-  .toast.show{ opacity:1; }
+:root{ --w:997.81; --h:935.33; }
+
+*{ box-sizing:border-box; }
+
+html,
+body{
+  margin:0;
+  padding:0;
+  background:transparent;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+body{
+  padding:24px;
+}
+
+.machine{
+  position:relative;
+  width:min(100%, 998px);
+  aspect-ratio:997.81/935.33;
+  margin:auto;
+}
+
+.layer{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  pointer-events:none;
+  user-select:none;
+}
+
+.hot{
+  position:absolute;
+  transform:translateZ(0);
+  font-family:Arial, Helvetica, sans-serif;
+  color:#000;
+}
+
+input.hot{
+  border:0;
+  background:transparent;
+  outline:none;
+  padding:0 16px;
+  font-size:18px;
+  line-height:1;
+  color:#000;
+}
+
+input.hot:focus{
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.18);
+  border-radius:12px;
+}
+
+input.small{
+  text-align:center;
+  padding:0 8px;
+}
+
+.btn{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  font-weight:700;
+  color:#000;
+}
+
+.choice{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+}
+
+.choice.selected::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:16px;
+  height:16px;
+  background:#000;
+  border-radius:50%;
+  transform:translate(-50%,-50%);
+}
+
+.mode{
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  color:#000;
+}
+
+.mode.selected{
+  box-shadow: inset 0 0 0 3px rgba(0,0,0,.22);
+  border-radius:12px;
+}
+
+#paper-output{
+  position:absolute;
+  left:11.27%;
+  top:76.43%;
+  width:77.46%;
+  height:22.31%;
+  padding:34px 54px;
+  font-size:19px;
+  line-height:1.35;
+  color:#000;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  pointer-events:none;
+}
+
+#paper-output.stacked{
+  justify-content:center;
+  text-align:left;
+}
+
+#paper-output .line{
+  width:100%;
+  max-width:86%;
+}
+
+#paper-output .stack{
+  min-width:58%;
+  max-width:88%;
+}
+
+#paper-output .piece{
+  white-space:nowrap;
+}
+
+#paper-output em{
+  font-style:italic;
+}
+
+.toast{
+  position:fixed;
+  left:50%;
+  bottom:24px;
+  transform:translateX(-50%);
+  background:#111;
+  color:#fff;
+  padding:8px 12px;
+  border-radius:999px;
+  font-size:14px;
+  opacity:0;
+  transition:opacity .2s;
+}
+
+.toast.show{
+  opacity:1;
+}
