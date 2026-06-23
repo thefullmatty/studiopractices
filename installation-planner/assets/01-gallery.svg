@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01_Gallery_Wall" data-name="01 Gallery Wall" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 997.81 845.17">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-2 {
+        filter: url(#drop-shadow-3);
+      }
+
+      .cls-3 {
+        filter: url(#drop-shadow-2);
+      }
+
+      .cls-4 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-4, .cls-5, .cls-6, .cls-7 {
+        stroke: #000;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-4, .cls-6, .cls-7 {
+        stroke-width: .25px;
+      }
+
+      .cls-5 {
+        fill: none;
+        stroke-linecap: round;
+      }
+
+      .cls-8 {
+        font-family: ArialMT, Arial;
+        font-size: 12px;
+      }
+
+      .cls-6 {
+        fill: url(#linear-gradient-3);
+      }
+
+      .cls-7 {
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <filter id="drop-shadow-1" x="5.9" y="116.72" width="142" height="729" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur" stdDeviation="3"/>
+      <feFlood flood-color="#000" flood-opacity=".75"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient" x1="12.68" y1="478.57" x2="135.27" y2="478.57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e5e5e5"/>
+      <stop offset="1" stop-color="#999"/>
+    </linearGradient>
+    <filter id="drop-shadow-2" x="128.9" y="166.72" width="746" height="625" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur-2" stdDeviation="3"/>
+      <feFlood flood-color="#000" flood-opacity=".75"/>
+      <feComposite in2="blur-2" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-2" x1="135.27" y1="476.09" x2="862.54" y2="476.09" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b3b3b3"/>
+      <stop offset="1" stop-color="#e5e5e5"/>
+    </linearGradient>
+    <filter id="drop-shadow-3" x="855.9" y="116.72" width="142" height="729" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur-3" stdDeviation="3"/>
+      <feFlood flood-color="#000" flood-opacity=".75"/>
+      <feComposite in2="blur-3" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <linearGradient id="linear-gradient-3" x1="862.54" y1="478.57" x2="985.13" y2="478.57" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#e5e5e5"/>
+      <stop offset="1" stop-color="#b3b3b3"/>
+    </linearGradient>
+  </defs>
+  <g class="cls-1">
+    <polygon class="cls-4" points="135.27 779.78 12.68 833.28 12.68 123.85 135.27 173.39 135.27 779.78"/>
+  </g>
+  <g class="cls-3">
+    <rect class="cls-7" x="135.27" y="173.39" width="727.26" height="605.39"/>
+  </g>
+  <g>
+    <line class="cls-5" x1="855.33" y1="407.75" x2="855.33" y2="766.66"/>
+    <polygon points="850.35 409.2 855.33 400.57 860.32 409.2 850.35 409.2"/>
+    <polygon points="850.35 765.2 855.33 773.83 860.32 765.2 850.35 765.2"/>
+  </g>
+  <text class="cls-8" transform="translate(797.29 591.5)"><tspan x="0" y="0">1500mm</tspan></text>
+  <g class="cls-2">
+    <polygon class="cls-6" points="862.54 779.78 985.13 833.28 985.13 123.85 862.54 173.39 862.54 779.78"/>
+  </g>
+</svg>

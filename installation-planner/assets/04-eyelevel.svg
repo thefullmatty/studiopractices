@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_04_Eye_Level" data-name="04 Eye Level" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 997.81 845.17">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        stroke: #000;
+        stroke-dasharray: 4;
+        stroke-linecap: round;
+        stroke-miterlimit: 10;
+      }
+    </style>
+  </defs>
+  <line class="cls-1" x1="135.27" y1="396.24" x2="862.54" y2="396.24"/>
+</svg>
