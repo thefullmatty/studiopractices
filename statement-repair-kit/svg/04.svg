@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_04_Process_Folder" data-name="Layer 04 &amp;quot;Process&amp;quot; Folder" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 997.81 935.33">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-2 {
+        fill: #b3b3b3;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="35.9" y="121" width="930" height="729" filterUnits="userSpaceOnUse">
+      <feOffset dx="2" dy="2"/>
+      <feGaussianBlur result="blur" stdDeviation="2"/>
+      <feFlood flood-color="#000" flood-opacity=".4"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-1">
+    <path class="cls-2" d="M948.57,158.39H385.55l-4-24.52c0-4.61-3.74-8.35-8.35-8.35h-88.64c-4.61,0-8.35,3.74-8.35,8.35l-4,24.52H40.77v674.7c0,4.68,3.79,8.47,8.47,8.47h899.33c4.68,0,8.47-3.79,8.47-8.47V166.86c0-4.68-3.79-8.47-8.47-8.47Z"/>
+  </g>
+</svg>
