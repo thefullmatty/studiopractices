@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Statement Repair Kit</title>
+  <link rel="stylesheet" href="css/styles.css" />
+
+</head>
+<body>
+  <main id="statement-repair-kit">
+    <h1 class="sr-only">Statement Repair Kit</h1>
+    <p class="sr-only">Artist statements often begin with vague sentences. Use this tool to recognise common weak phrases, find a stronger writing move, and rewrite the sentence so it belongs to your own work.</p>
+
+    <div class="repair-kit-shell" aria-label="Statement Repair Kit interface">
+      <img class="svg-layer layer-base" src="svg/01.svg" alt="" />
+      <img class="svg-layer layer-folder active-folder" data-folder="Encounter" src="svg/02.svg" alt="" />
+      <img class="svg-layer layer-folder" data-folder="Intention" src="svg/03.svg" alt="" />
+      <img class="svg-layer layer-folder" data-folder="Process" src="svg/04.svg" alt="" />
+      <img class="svg-layer layer-folder" data-folder="Context" src="svg/05.svg" alt="" />
+      <img class="svg-layer layer-folder" data-folder="Reflection" src="svg/06.svg" alt="" />
+      <img class="svg-layer layer-sections" src="svg/07.svg" alt="" />
+      <img class="svg-layer layer-interface" src="svg/08.svg" alt="" />
+      <img class="svg-layer layer-text" src="svg/09.svg" alt="" />
+
+      <div class="html-overlay">
+        <div class="section-tabs" id="sectionTabs" aria-label="Statement sections"></div>
+
+        <section class="section-info" aria-live="polite">
+          <h2 id="sectionTitle">Encounter</h2>
+          <p class="subtitle" id="sectionSubtitle">what is here?</p>
+          <p class="prompt" id="sectionPrompt">What is the viewer meeting?</p>
+        </section>
+
+        <div class="avoid-field">
+          <label class="field-label" for="avoidSelect">Avoid</label>
+          <select id="avoidSelect"></select>
+        </div>
+
+        <div class="try-field">
+          <span class="field-label">Try instead</span>
+          <p class="try-text" id="tryText"></p>
+        </div>
+
+        <section class="writer">
+          <label class="field-label" for="studentSentence">Your version</label>
+          <textarea id="studentSentence" placeholder="Rewrite the sentence so it belongs to your work..."></textarea>
+        </section>
+
+        <section class="draft" aria-label="Draft sentences for export">
+          <div id="draftOutput"></div>
+        </section>
+
+        <section class="actions" aria-label="Draft actions">
+          <button class="action-button" id="addButton">Add to my draft</button>
+          <button class="action-button secondary" id="clearSectionButton">Clear current selection</button>
+          <button class="action-button secondary" id="copyButton">Copy draft text</button>
+          <button class="action-button secondary" id="downloadButton">Download .txt</button>
+          <button class="action-button secondary" id="clearAllButton">Clear all</button>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="status" id="statusMessage" aria-live="polite"></div>
+  </main>
+
+  <script src="js/statement-repair-kit.js"></script>
+</body>
+</html>
