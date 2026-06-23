@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2D Wall Installation Planner</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="planner-wrap" aria-label="2D Wall Installation Planner">
+    <div id="planner-stage" class="planner-stage">
+      <!-- SVGs stay as live vector layers in the page. This keeps the designed text and lines crisp. -->
+      <img id="layer-gallery" class="svg-layer layer-gallery" src="assets/01-gallery.svg" alt="" aria-hidden="true" />
+      <img id="layer-sections" class="svg-layer layer-sections" src="assets/02-sections.svg" alt="" aria-hidden="true" />
+      <img id="layer-text" class="svg-layer layer-text" src="assets/03-text.svg" alt="" aria-hidden="true" />
+
+      <!-- p5 only draws the generated draggable artworks. -->
+      <div id="canvas-holder" class="canvas-holder"></div>
+
+      <!-- Eyeline stays above the generated artworks. -->
+      <img id="layer-eyeline" class="svg-layer layer-eyeline" src="assets/04-eyelevel.svg" alt="" aria-hidden="true" />
+
+      <form id="artwork-form" class="artwork-form" autocomplete="off" aria-label="Artwork dimensions">
+        <!-- Inputs and invisible buttons are inserted by sketch.js so their positions stay tied to the SVG coordinates. -->
+      </form>
+    </div>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+  <script src="sketch.js"></script>
+</body>
+</html>
