@@ -424,38 +424,73 @@ function buildDraftOutput() {
 async function copyDraftText() {
   const output = buildDraftOutput();
 
+  if (!output.trim()) {
+    setStatus("There is no draft text to copy yet.");
+    return;
+  }
+
+  // Method 1: modern clipboard API
+  // Works best on HTTPS pages, but can fail inside some iframe/Cargo contexts.
   try {
     if (navigator.clipboard && window.isSecureContext) {
       await navigator.clipboard.writeText(output);
       setStatus("Draft copied to clipboard.");
       return;
     }
-
-    fallbackCopyText(output);
-    setStatus("Draft copied to clipboard.");
   } catch (error) {
-    setStatus("Copy did not work in this browser or iframe. Use Download .txt instead.");
+    console.warn("Modern clipboard copy failed, trying fallback method.", error);
+  }
+
+  // Method 2: fallback copy using a temporary textarea
+  try {
+    const copied = fallbackCopyText(output);
+
+    if (copied) {
+      setStatus("Draft copied to clipboard.");
+      return;
+    }
+
+    throw new Error("Fallback copy returned false.");
+  } catch (error) {
+    console.warn("Fallback copy failed.", error);
+    setStatus("Copy may be blocked in this browser or iframe. Use Download .txt instead.");
   }
 }
 
 function fallbackCopyText(text) {
   const tempTextArea = document.createElement("textarea");
-  tempTextArea.value = text;
 
+  tempTextArea.value = text;
   tempTextArea.setAttribute("readonly", "");
+
+  // Keep it visible enough for browser selection, but outside the viewport.
   tempTextArea.style.position = "fixed";
-  tempTextArea.style.top = "-9999px";
-  tempTextArea.style.left = "-9999px";
+  tempTextArea.style.top = "0";
+  tempTextArea.style.left = "0";
+  tempTextArea.style.width = "1px";
+  tempTextArea.style.height = "1px";
+  tempTextArea.style.padding = "0";
+  tempTextArea.style.border = "0";
+  tempTextArea.style.outline = "0";
+  tempTextArea.style.boxShadow = "none";
+  tempTextArea.style.background = "transparent";
+  tempTextArea.style.opacity = "0";
 
   document.body.appendChild(tempTextArea);
+
+  tempTextArea.focus();
   tempTextArea.select();
+  tempTextArea.setSelectionRange(0, tempTextArea.value.length);
 
-  const success = document.execCommand("copy");
-  document.body.removeChild(tempTextArea);
+  let successful = false;
 
-  if (!success) {
-    throw new Error("Fallback copy failed.");
+  try {
+    successful = document.execCommand("copy");
+  } finally {
+    document.body.removeChild(tempTextArea);
   }
+
+  return successful;
 }
 
 function downloadDraftText() {
