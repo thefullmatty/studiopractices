@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01-animated-card-start-position" data-name="01-animated-card-start-position" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1280 1024">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-2 {
+        fill: #e5e5e5;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="94" y="6" width="554" height="428" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur" stdDeviation="3"/>
+      <feFlood flood-color="#000" flood-opacity=".75"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-1">
+    <path class="cls-2" d="M100.68,12.29v409.32h161.92v-6.08c-.58.09-1.16.14-1.76.14-6.55,0-11.86-5.31-11.86-11.86s5.31-11.86,11.86-11.86,11.86,5.31,11.86,11.86c0,3.81-1.81,7.2-4.6,9.37v8.43h200.37v-8.08c-3.06-2.15-5.07-5.7-5.07-9.72,0-6.55,5.31-11.86,11.86-11.86s11.86,5.31,11.86,11.86-5.31,11.86-11.86,11.86v5.93h160.16V12.29H100.68Z"/>
+  </g>
+</svg>

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Studio Recipes</title>
+  <style>
+    :root{ --ink:#111; --paper:#f4f1e9; --field:#faf8f1; --accent:#191919; }
+    *{ box-sizing:border-box; }
+    body{ margin:0; background:transparent; font-family:Arial, Helvetica, sans-serif; color:var(--ink); }
+    .viewport{ position:relative; width:100%; max-width:1280px; margin:0 auto; overflow:hidden; background:transparent; }
+    .stage{ position:absolute; left:0; top:0; width:1280px; height:1024px; transform-origin:0 0; }
+    .layer{ position:absolute; inset:0; width:1280px; height:1024px; pointer-events:none; user-select:none; }
+    .moving-card{ position:absolute; left:0; top:0; width:1280px; height:1024px; z-index:1; transition:transform 760ms cubic-bezier(.21,.77,.24,1); }
+    .moving-card.is-visible{ transform:translate(583.25px,0); }
+    .moving-card img{ position:absolute; inset:0; width:1280px; height:1024px; pointer-events:none; }
+    .card-text{ position:absolute; left:134px; top:44px; width:470px; height:336px; font-size:12px; line-height:1.25; overflow:auto; z-index:2; color:#111; padding-right:8px; scrollbar-width:thin; }
+    .card-text h2{ margin:0 0 10px 0; font-size:24px; letter-spacing:.02em; font-weight:700; }
+    .card-text h3{ margin:9px 0 3px 0; font-size:12px; text-transform:uppercase; letter-spacing:.08em; }
+    .card-text p{ margin:2px 0; }
+    #base{ z-index:2; }
+    #fields-svg{ z-index:3; }
+    #buttons-svg{ z-index:4; }
+    .ui{ position:absolute; z-index:6; }
+    .label{ font-size:14px; font-weight:700; letter-spacing:.01em; }
+    .small-label{ font-size:13px; font-weight:700; }
+    .heading{ position:absolute; left:64.83px; top:128px; font-size:44px; font-weight:700; letter-spacing:-.02em; }
+    .instructions{ position:absolute; left:67px; top:195px; width:510px; font-size:12px; line-height:1.2; }
+    .instructions p{ margin:0 0 14px 0; }
+    .instructions .last{ margin-top:12px; font-weight:700; }
+    .input-field{ position:absolute; z-index:8; height:34px; border:0; outline:0; background:transparent; padding:8px 30px 7px 10px; font-size:12px; font-family:Arial, Helvetica, sans-serif; color:#111; }
+    .input-field::placeholder{ color:#777; }
+    .material-input{ height:23px; padding:3px 20px 3px 7px; font-size:11px; }
+    .editor-title{ position:absolute; left:363px; top:562px; font-size:22px; font-weight:700; }
+    .editor-subtitle{ position:absolute; left:363px; top:596px; font-size:12px; }
+    .section-title{ position:absolute; font-size:20px; font-weight:700; }
+    .static-text{ position:absolute; z-index:6; }
+    .recipe-editor{ position:absolute; left:375px; top:634px; width:530px; height:284px; overflow:auto; padding:0 8px 10px 0; font-size:13px; line-height:1.35; outline:0; }
+    .recipe-line{ margin:0 0 8px 0; }
+    .recipe-line strong{ display:block; font-size:12px; text-transform:uppercase; letter-spacing:.06em; margin-bottom:2px; }
+    .slot{ display:block; min-height:18px; padding:3px 4px; border-radius:2px; }
+    .slot:focus{ outline:1px dotted #333; background:rgba(255,255,255,.5); }
+    .slot[data-placeholder]:empty::before{ content:attr(data-placeholder); color:#777; pointer-events:none; font-style:italic; }
+    .muted{ color:#737373; }
+    .button{ position:absolute; z-index:9; border:0; background:transparent; cursor:pointer; font-family:Arial, Helvetica, sans-serif; font-size:12px; font-weight:700; color:#111; padding:0; text-align:center; display:flex; align-items:center; justify-content:center; line-height:1.05; }
+    .button:hover{ text-decoration:underline; }
+    .button:focus-visible{ outline:2px solid #111; outline-offset:2px; }
+    .btn-copy{ left:869.85px; top:443.64px; width:104.37px; height:40.22px; }
+    .btn-print{ left:990.67px; top:443.64px; width:104.37px; height:40.22px; }
+    .btn-clear{ left:1111.5px; top:443.64px; width:104.37px; height:40.22px; }
+    .btn-step{ left:475.49px; top:948.18px; width:118.51px; height:29.86px; }
+    .btn-constraint{ left:611.14px; top:948.18px; width:118.51px; height:29.86px; }
+    .btn-make{ left:745.76px; top:948.18px; width:170.23px; height:29.86px; }
+    .status{ position:absolute; left:929px; top:490px; font-size:11px; color:#333; min-width:220px; }
+    /* left inputs */
+    #site{ left:62.64px; top:622.35px; width:265.51px; }
+    #action{ left:62.64px; top:690.76px; width:265.51px; }
+    #location{ left:62.64px; top:759.16px; width:265.51px; }
+    #documentation{ left:62.64px; top:827.56px; width:265.51px; }
+    #journal{ left:62.64px; top:895.97px; width:265.51px; }
+    /* right inputs */
+    #material1{ left:1005.16px; top:605.72px; width:194.29px; }
+    #material2{ left:1005.16px; top:636.84px; width:194.29px; }
+    #material3{ left:1004.70px; top:668.35px; width:195.53px; }
+    #surface1{ left:1004.70px; top:715.22px; width:195.53px; }
+    #surface2{ left:1004.70px; top:746.54px; width:195.53px; }
+    #surface3{ left:1004.70px; top:777.85px; width:195.53px; }
+    #tool1{ left:1004.70px; top:824.72px; width:195.53px; }
+    #tool2{ left:1004.70px; top:856.04px; width:195.53px; }
+    #tool3{ left:1004.70px; top:887.35px; width:195.53px; }
+    #other{ left:1005.38px; top:934.22px; width:195.53px; }
+    @media print{
+      body{ background:white; }
+      .viewport{ width:100%; max-width:none; height:auto !important; overflow:visible; }
+      .stage{ transform:none !important; position:relative; width:100%; height:auto; }
+      .stage > *:not(.moving-card){ display:none !important; }
+      .moving-card{ position:relative; left:0; top:0; transform:none !important; width:180mm; height:144mm; margin:10mm auto; overflow:hidden; }
+      .moving-card img{ width:415mm; height:331.8mm; transform:translate(-14.2mm, -1.7mm); }
+      .card-text{ left:12mm; top:11mm; width:156mm; height:118mm; font-size:10pt; overflow:visible; }
+      .card-text h2{ font-size:20pt; }
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport" id="viewport">
+    <div class="stage" id="stage">
+      <div class="moving-card" id="movingCard" aria-live="polite">
+        <img src="assets/01-animated-card-start-position.svg" alt="" />
+        <div class="card-text" id="cardText">
+          <h2>My Recipe</h2>
+          <p>Build and edit your studio recipe, then make your card.</p>
+        </div>
+      </div>
+
+      <img class="layer" id="base" src="assets/03-card-stack-consol-base.svg" alt="" />
+      <img class="layer" id="fields-svg" src="assets/05-dropdown-menu-editable-areas.svg" alt="" />
+      <img class="layer" id="buttons-svg" src="assets/04-buttons.svg" alt="" />
+
+      <div class="heading static-text">Studio Recipes</div>
+      <div class="instructions static-text">
+        <p>A recipe offers ingredients, steps, and conditions, but the making is yours.</p>
+        <p>Use this tool to compose a studio recipe from your site of inquiry. Select or write an action, choose how you will document it, and add a journal prompt to help you reflect on what happens.</p>
+        <p>The recipe builder will help you turn these parts into an editable studio recipe. You can revise it, make it more specific to your project, then copy or download it as a prompt for your next studio session.</p>
+        <p>You can follow the recipe closely, adapt it, or use it as a starting point for something unexpected.</p>
+        <p>Some recipes work. Some fail. Both can teach you something.</p>
+        <p class="last">A recipe is not a rule. It is a way to begin.</p>
+      </div>
+
+      <div class="static-text section-title" style="left:63.96px;top:565px;">Build from</div>
+      <div class="static-text small-label" style="left:63.96px;top:601px;">Site of inquiry</div>
+      <div class="static-text small-label" style="left:63.96px;top:670px;">Action</div>
+      <div class="static-text small-label" style="left:63.96px;top:738px;">Location of action</div>
+      <div class="static-text small-label" style="left:63.96px;top:807px;">Documentation</div>
+      <div class="static-text small-label" style="left:63.96px;top:875px;">Journal</div>
+
+      <div class="editor-title static-text">Recipe builder</div>
+      <div class="editor-subtitle static-text">Compose and edit your studio recipe</div>
+
+      <div class="static-text section-title" style="left:951.5px;top:563px;">Material conditions</div>
+      <div class="static-text small-label" style="left:953.09px;top:609px;">Medium</div>
+      <div class="static-text small-label" style="left:953.09px;top:640px;">Medium</div>
+      <div class="static-text small-label" style="left:953.09px;top:672px;">Medium</div>
+      <div class="static-text small-label" style="left:952.3px;top:719px;">Surface</div>
+      <div class="static-text small-label" style="left:952.3px;top:750px;">Surface</div>
+      <div class="static-text small-label" style="left:952.3px;top:782px;">Surface</div>
+      <div class="static-text small-label" style="left:952.3px;top:829px;">Tool</div>
+      <div class="static-text small-label" style="left:952.3px;top:860px;">Tool</div>
+      <div class="static-text small-label" style="left:952.3px;top:891px;">Tool</div>
+      <div class="static-text small-label" style="left:952.98px;top:938px;">Other</div>
+
+      <input id="site" class="input-field" placeholder="Select or enter your site…" autocomplete="off" />
+      <input id="action" class="input-field" list="actionList" placeholder="Select or enter an action…" autocomplete="off" />
+      <input id="location" class="input-field" list="locationList" placeholder="Select or enter a location…" autocomplete="off" />
+      <input id="documentation" class="input-field" list="documentationList" placeholder="Select or enter documentation…" autocomplete="off" />
+      <input id="journal" class="input-field" list="journalList" placeholder="Select or enter a journal prompt…" autocomplete="off" />
+
+      <input id="material1" class="input-field material-input" list="materialList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="material2" class="input-field material-input" list="materialList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="material3" class="input-field material-input" list="materialList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="surface1" class="input-field material-input" list="surfaceList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="surface2" class="input-field material-input" list="surfaceList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="surface3" class="input-field material-input" list="surfaceList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="tool1" class="input-field material-input" list="toolList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="tool2" class="input-field material-input" list="toolList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="tool3" class="input-field material-input" list="toolList" placeholder="Select or enter…" autocomplete="off" />
+      <input id="other" class="input-field material-input" list="otherList" placeholder="Select or enter…" autocomplete="off" />
+
+      <div class="recipe-editor ui" id="recipeEditor">
+        <div class="recipe-line"><strong>Start with:</strong><span class="slot muted" contenteditable="true" data-slot="site">your site of inquiry</span></div>
+        <div class="recipe-line"><strong>Try:</strong><span class="slot muted" contenteditable="true" data-slot="action">a studio action</span></div>
+        <div class="recipe-line"><strong>Use:</strong><span class="slot muted" contenteditable="true" data-slot="use">materials and tools</span></div>
+        <div class="recipe-line"><strong>Work on/in:</strong><span class="slot muted" contenteditable="true" data-slot="work">a surface or location</span></div>
+        <div class="recipe-line"><strong>Document by:</strong><span class="slot muted" contenteditable="true" data-slot="documentation">a method of recording</span></div>
+        <div class="recipe-line"><strong>Journal from:</strong><span class="slot muted" contenteditable="true" data-slot="journal">a reflective question</span></div>
+        <div class="recipe-line next-line"><strong>Next:</strong><span class="slot" contenteditable="true" data-slot="next">Decide what should be repeated, changed, removed, or developed.</span></div>
+      </div>
+
+      <button class="button btn-copy" id="copyBtn" type="button">copy</button>
+      <button class="button btn-print" id="downloadBtn" type="button">download recipe</button>
+      <button class="button btn-clear" id="clearBtn" type="button">clear</button>
+      <button class="button btn-step" id="stepBtn" type="button">+ add step</button>
+      <button class="button btn-constraint" id="constraintBtn" type="button">+ constraint</button>
+      <button class="button btn-make" id="makeBtn" type="button">make recipe card</button>
+      <div class="status static-text" id="status"></div>
+    </div>
+  </div>
+
+  <datalist id="actionList"></datalist>
+  <datalist id="locationList"></datalist>
+  <datalist id="documentationList"></datalist>
+  <datalist id="journalList"></datalist>
+  <datalist id="materialList"></datalist>
+  <datalist id="surfaceList"></datalist>
+  <datalist id="toolList"></datalist>
+  <datalist id="otherList"></datalist>
+
+  <script src="script.js"></script>
+</body>
+</html>
