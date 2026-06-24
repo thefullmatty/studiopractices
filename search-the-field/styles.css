@@ -11,7 +11,7 @@
 * { box-sizing: border-box; }
 html, body { margin: 0; min-height: 100%; background: transparent; font-family: Arial, Helvetica, sans-serif; color: var(--ink); }
 .tool-wrap { width: 100%; min-height: 100vh; display: grid; place-items: start center; background: transparent; }
-.stage { position: relative; width: min(100vw, var(--stage-w)); aspect-ratio: 960.87 / 890; overflow: hidden; background: #fff; }
+.stage { position: relative; width: min(100vw, var(--stage-w)); aspect-ratio: 960.87 / 890; overflow: hidden; background: transparent; }
 .stage-inner { position: absolute; left: 0; top: 0; width: var(--inner-w); height: var(--inner-h); transform: scale(var(--stage-scale)); transform-origin: top left; }
 .layer { position: absolute; left: 0; top: 0; pointer-events: none; user-select: none; }
 .base { z-index: 0; width: 960.87px; height: 708.74px; }
