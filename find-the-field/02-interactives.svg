@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_02-interactive" data-name="02-interactive" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1021.31 940.98">
+  <defs>
+    <style>
+      .cls-1 {
+        mask: url(#mask);
+      }
+
+      .cls-2 {
+        filter: url(#luminosity-invert);
+      }
+
+      .cls-3 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-4 {
+        filter: url(#luminosity-invert-5);
+      }
+
+      .cls-5 {
+        filter: url(#luminosity-invert-6);
+      }
+
+      .cls-6 {
+        filter: url(#luminosity-invert-2);
+      }
+
+      .cls-7 {
+        filter: url(#luminosity-invert-4);
+      }
+
+      .cls-8 {
+        filter: url(#luminosity-invert-7);
+      }
+
+      .cls-9 {
+        filter: url(#luminosity-invert-3);
+      }
+
+      .cls-10 {
+        mask: url(#mask-2);
+      }
+
+      .cls-11 {
+        mask: url(#mask-3);
+      }
+
+      .cls-12 {
+        mask: url(#mask-4);
+      }
+
+      .cls-13 {
+        mask: url(#mask-5);
+      }
+
+      .cls-14 {
+        mask: url(#mask-6);
+      }
+
+      .cls-15 {
+        mask: url(#mask-1);
+      }
+
+      .cls-16 {
+        fill: #fff;
+      }
+
+      .cls-17 {
+        opacity: .75;
+      }
+
+      .cls-18 {
+        fill: #333;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="841.9" y="623.36" width="108" height="108" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur" stdDeviation="3"/>
+      <feFlood flood-color="#6b6b6b" flood-opacity=".75"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="luminosity-invert" x="81.66" y="627.49" width="131" height="46" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask" x="81.66" y="627.49" width="131" height="46" maskUnits="userSpaceOnUse">
+      <g class="cls-2">
+        <use transform="translate(81.66 627.49)" xlink:href="#image"/>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-2" x="703.66" y="627.49" width="131" height="46" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask-1" x="703.66" y="627.49" width="131" height="46" maskUnits="userSpaceOnUse">
+      <g class="cls-6">
+        <use transform="translate(703.66 627.49)" xlink:href="#image"/>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-3" x="703.66" y="680.49" width="131" height="46" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask-2" x="703.66" y="680.49" width="131" height="46" maskUnits="userSpaceOnUse">
+      <g class="cls-9">
+        <use transform="translate(703.66 680.49)" xlink:href="#image"/>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-4" x="216.66" y="627.49" width="239" height="46" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask-3" x="216.66" y="627.49" width="239" height="46" maskUnits="userSpaceOnUse">
+      <g class="cls-7">
+        <use transform="translate(216.66 627.49)" xlink:href="#image-2"/>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-5" x="216.66" y="680.49" width="239" height="167" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask-4" x="216.66" y="680.49" width="239" height="167" maskUnits="userSpaceOnUse">
+      <g class="cls-4">
+        <use transform="translate(216.66 680.49)" xlink:href="#image-3"/>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-6" x="459.66" y="627.49" width="239" height="46" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask-5" x="459.66" y="627.49" width="239" height="46" maskUnits="userSpaceOnUse">
+      <g class="cls-5">
+        <use transform="translate(459.66 627.49)" xlink:href="#image-2"/>
+      </g>
+    </mask>
+    <filter id="luminosity-invert-7" x="459.66" y="680.49" width="239" height="167" color-interpolation-filters="sRGB" filterUnits="userSpaceOnUse">
+      <feColorMatrix result="cm" values="-1 0 0 0 1 0 -1 0 0 1 0 0 -1 0 1 0 0 0 1 0"/>
+    </filter>
+    <mask id="mask-6" x="459.66" y="680.49" width="239" height="167" maskUnits="userSpaceOnUse">
+      <g class="cls-8">
+        <use transform="translate(459.66 680.49)" xlink:href="#image-3"/>
+      </g>
+    </mask>
+    <image id="image" width="131" height="46" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIMAAAAuCAYAAAALH6pWAAAACXBIWXMAAAsSAAALEgHS3X78AAADHklEQVR4nO3cW2viQBjG8SeJSZqTQgxeCNI7v/9nKim0MRI6xkRzmNmbnXcTq7t7sWxtfH8gFDKFlvmbg+BrAFBgDID51X8Aux8z/UMcx1itVlgsFgiCAI7jwLZtmKZJryHDMP77H8v+jlK/TvZSSiilIKVE3/do2xan0wllWSLLMqRpSmsphtVqhe12i81mg+VyiSiK4HkebNuGZVkwDIMC4BDunw5Ch9B1HZqmQV3X+Pj4QJZleHl5gVIKr6+vAAYxLBYLbDYbbLdbrNdrxHEM3/fhui4sy4JpmhzDN6JjkFJCSom2bXE+n3E8HpHnOdI0hZQSeZ5/jiEIAiyXS6zXazw/PyNJEoRhePXMwL6P4SXifD7jcDggCAIopbDf7xEEAa2lGBzHQRRFiOMYSZIgSRL4vg/Lsr7kn2D/Xtd1eHp6glIKQgjM53N4nkfHKQbbtuF5HnzfRxiGHMIEzWYzhGGIqqoQhiHdE2r0iGCaJmzbhuu6dGlg0zObzeC6LhzHgeM4o30exWBZFr3YdFmWRW/44UcGoxgMwxg9NbBp0vt8udfm5SJ+api+W/vMH0c/sMsgrp4Z2PRd22fzdwfZY+HLxAO69cbnGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGBjhGB7Q8Iu5Q+afFrDHMTozKKU4igdxba/5MvHghkFQDHqoA58dpu/WPo/uGfR3+TmGabu116MY+r6nF5smpRS6rkPbtuj7HlJKOkYxDOf96IVsevQ4n6ZpPu0zxdC2Leq6RlVVOBwOqKqKg5iYrutQVRXKskRZlqjrGl3X0XEa1tE0DcqyRFEUmM/nMAwDURSNxvjwxLf7d3m/p+8L9BgfIQTyPEdRFBBC4HQ60VqK4Xg8Yr/f07AnPfvncsDXtQA4ivtwGYJ+YtDT3vTIPz3Ua7fboSxLWk8xCCFoJmBRFJ9G//G0t+/l1ui/qqoghMD7+zvSNMVut6PfoRiyLAMAvL29jYaCDi8RlxFwFPfn2tlBP0bqh4S6rq8OBTXAs6PZT/xxNCM/ACK3vq828TFMAAAAAElFTkSuQmCC"/>
+    <image id="image-2" width="239" height="46" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAO8AAAAuCAYAAADAxE6oAAAACXBIWXMAAAsSAAALEgHS3X78AAADfElEQVR4nO3dUY+iOgCG4Q8QUJAxUeOFiZk7//+P0mQiGBytiNCWc0UXHd3NOTu70pPvSUgmoSbMxZvWYlIHQAMiso776gcgov9m0P4xnU6xWCwwmUwQxzGCIIDv+3Bd11xdjuP89Ycl+j9qmh+LX601mqaB1hpKKUgpcb1ecT6fcTgckGUZ8jwH0Il3sVhgvV5jtVphNpshSRKMRiP4vg/P8+A4jgmW4RJ9rzbgNlwpJeq6RlEUEEIgTVNsNhs4jvM13slkgtVqhfV6jeVyiel0iiiKEIYhPM+D67qMl+gP6carlIJSCmVZ4nw+I8sybLdbaK2x2+3MZ0y8cRxjNpthuVzi/f0d8/kc4/H44cxLRH9Gd8lcVRVOpxPiOAYA7Pd7RFFkxpp4gyBAkiSYTqeYz+eYz+eIogie5/39/4CIIKXEcDiE1hqfn59IkgRhGJr7ZhfK932MRiNEUYTxeMxwiV5sMBggjmMkSYLxeIzhcIjBwMy3P+J1XRe+7yMMQ7NUJqLXGgwGCILAXN0ub+L1PM9cRNQPnueZCbX7yvYmXsdxbnaViej12i7v23TvB3FXmahfnnXJn0cSWeI+4IczLxH1y6Mu3Z/dJKL+4rKZqOeeTayMl8hSjJfIUoyXyFKMl8hSjJfIUoyXyFKMl8hSjJfIUoyXyFKMl8hSjJfIUoyXyFKMl8hSjJfIUoyXyFKMl6jnugeRdbm/GkBE/XQz8zZNw4iJeuhRm1w2E1mkG7CJtz3Ul7MvUb886/LmO6/W2kRMRP3wrM2beNtDfZVSL3lIIrrVNA2klKjrGkopaK3NPROvUgp1XaMsSzOQiF5LSomqqlBV1ZcuTbx1XeNyuaAoCpxOJxRFwYCJXkhKiaIoIISAEAKXywVSSnPfnNRbVRWEEMjzHG9vb3AcB0mSmKMF25PKunjKAtHvud9far/XKqVwvV5xPB6RZRnyPMfxeERZlmasifd8PmO/32O73QIATqcT4jhGGIbmXNBnZxkxYqJ/7z7cdkdZaw0pJcqyhBACWZZhu90iTVMIIcx4E+/xeMRmswEA5HmOJEkwGo1uDvVtI2WsRN+rDbkbb1VVKIoCh8MBaZpis9kgTVPzGRPvbrcDAHx8fCCOYwRB8GXJfB8tIyb6PY9m3/a1ULuJfLlcIITAbrczEywAOAD4UpfIQvx5JJGl/gFQ8LZh9JmbngAAAABJRU5ErkJggg=="/>
+    <image id="image-3" width="239" height="167" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAO8AAACnCAYAAAD5ewu4AAAACXBIWXMAAAsSAAALEgHS3X78AAAFRElEQVR4nO3aX0/iaBiG8bstFAQaEyQemJg58/t/J3UOsDjyp9JC+7JH7SDj7G42MwP35volTVDehnpw5akvjSQdBMBOfO4LAPDf9NoX0+lUt7e3ur6+1ng8Vpqm6vf7iuO4O45FUfTHLxb4Pzocvt/8hhB0OBwUQlDTNKrrWlVVqSgKvb29Kc9zffv2TdJRvLe3t3p4eND9/b1ubm6UZZmurq7U7/eVJImiKOqCJVzg12oDbsOt61r7/V7v7+/abDZ6eXnR09OToij6Md7r62vd39/r4eFBd3d3mk6nGo1GGgwGSpJEcRwTL/CbHMfbNI2aplFZliqKQnme6/n5WSEEzefz7pwu3vF4rJubG93d3enLly+azWaaTCafTl4Av8fxLfNut9N6vdZ4PJYkLRYLjUajbm0Xb5qmyrJM0+lUs9lMs9lMo9FISZL8+b8AgOq61nA4VAhBy+VSWZZpMBh073e7UP1+X1dXVxqNRppMJoQLnFmv19N4PFaWZZpMJhoOh+r1unn7Pd44jtXv9zUYDLpbZQDn1ev1lKZpdxx3+SHeJEm6A8BlSJKkG6jHX9l+iDeKog+7ygDOr+3ytM34dBG7ysBl+VmXPB4JmDgN+NPJC+CyfNZl/HdvArhc3DYDF+5ng5V4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvYIp4AVPEC5giXsAU8QKmiBcwRbyAKeIFTBEvcOEOh8OnvydewFQX78/qBnB+n/UZny4gYuAynbbJbTNw4dqhejpcu3hDCJ8uAHBe/xjv4XBQCEFN0yiEcJaLBPCjEILquu4GbCs+XdA0jZqmOctFAvio7XK/33cBt7p4m6bRfr9XWZba7Xaq6/osFwvgu91up7IsVVWVqqr6MFi7eOu61vv7u4qi0Hq9VlEUBAycSQhBZVlqvV5rtVpptVppu91qv993a3rti6qqtNlslOe5xuOxQgjKskxpmipJEkVRpCiKPnzA6c8A/r3TjeF2Q6q9VS7LUqvVSvP5XIvFQsvlUtvttlvfxVsUhV5eXvT8/CxJWi6XmkwmStNU/X5fcRx3sRIt8Ou0Ebfxtv/jVlWl1WqlxWKhr1+/Ks9zbTab7rwu3re3Nz09PSmEoMVioSzLNBwOu8nbxku4wK93/FVQO3mrqtJ2u9VyuVSe53p8fNTr62t3ThdvnueKokjz+Vyj0UiDwUC9Xu9DuBJTF/hdTgNuN5G32602m41eX1/1+PjYrY8k8UQGYIjHIwFTfwFKX9Gl5Y87ZgAAAABJRU5ErkJggg=="/>
+  </defs>
+  <g class="cls-3">
+    <circle class="cls-18" cx="892.65" cy="674.02" r="44.51"/>
+  </g>
+  <g>
+    <rect class="cls-16" x="84.15" y="629.51" width="126.23" height="41.42" rx="2" ry="2"/>
+    <g class="cls-1">
+      <g class="cls-17">
+        <rect x="84.15" y="629.51" width="126.23" height="41.42" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="cls-16" x="705.91" y="629.51" width="126.23" height="41.42" rx="2" ry="2"/>
+    <g class="cls-15">
+      <g class="cls-17">
+        <rect x="705.91" y="629.51" width="126.23" height="41.42" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="cls-16" x="705.91" y="682.54" width="126.23" height="41.42" rx="2" ry="2"/>
+    <g class="cls-10">
+      <g class="cls-17">
+        <rect x="705.91" y="682.54" width="126.23" height="41.42" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="cls-16" x="218.71" y="629.51" width="234.27" height="41.42" rx="2" ry="2"/>
+    <g class="cls-11">
+      <g class="cls-17">
+        <rect x="218.71" y="629.51" width="234.27" height="41.42" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="cls-16" x="218.71" y="682.54" width="234.27" height="162.54" rx="2" ry="2"/>
+    <g class="cls-12">
+      <g class="cls-17">
+        <rect x="218.71" y="682.54" width="234.27" height="162.54" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="cls-16" x="462.31" y="629.51" width="234.27" height="41.42" rx="2" ry="2"/>
+    <g class="cls-13">
+      <g class="cls-17">
+        <rect x="462.31" y="629.51" width="234.27" height="41.42" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+  <g>
+    <rect class="cls-16" x="462.31" y="682.54" width="234.27" height="162.54" rx="2" ry="2"/>
+    <g class="cls-14">
+      <g class="cls-17">
+        <rect x="462.31" y="682.54" width="234.27" height="162.54" rx="2" ry="2"/>
+      </g>
+    </g>
+  </g>
+</svg>

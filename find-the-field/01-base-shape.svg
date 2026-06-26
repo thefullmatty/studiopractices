@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_01-base-shape" data-name="01-base-shape" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1021.31 940.98">
+  <defs>
+    <style>
+      .cls-1 {
+        filter: url(#drop-shadow-1);
+      }
+
+      .cls-2 {
+        filter: url(#drop-shadow-2);
+      }
+
+      .cls-3 {
+        fill: none;
+      }
+
+      .cls-3, .cls-4 {
+        opacity: .64;
+        stroke: #000;
+        stroke-miterlimit: 10;
+        stroke-width: .25px;
+      }
+
+      .cls-4 {
+        fill: gray;
+      }
+    </style>
+    <filter id="drop-shadow-1" x="26.66" y="535.49" width="974" height="370" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur" stdDeviation="3"/>
+      <feFlood flood-color="#6b6b6b" flood-opacity=".75"/>
+      <feComposite in2="blur" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="drop-shadow-2" x="26.66" y="15.49" width="974" height="522" filterUnits="userSpaceOnUse">
+      <feOffset dx="3" dy="3"/>
+      <feGaussianBlur result="blur-2" stdDeviation="3"/>
+      <feFlood flood-color="#6b6b6b" flood-opacity=".75"/>
+      <feComposite in2="blur-2" operator="in"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g class="cls-1">
+    <rect class="cls-4" x="33.2" y="542.36" width="954.92" height="350.82" rx="4" ry="4"/>
+  </g>
+  <g class="cls-2">
+    <rect class="cls-3" x="33.2" y="21.69" width="954.92" height="502.8" rx="4" ry="4"/>
+  </g>
+</svg>
