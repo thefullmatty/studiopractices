@@ -313,7 +313,7 @@ body {
   color: #111;
   display: grid;
   place-items: center;
-  padding: 8px 11px;
+  padding: var(--bubble-pad-y, 8px) var(--bubble-pad-x, 11px);
   text-align: center;
   cursor: grab;
   user-select: none;

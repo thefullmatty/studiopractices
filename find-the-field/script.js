@@ -1866,9 +1866,7 @@ function buildBubble(node) {
   el.dataset.role = node.role;
   el.classList.add(`role-${node.role}`, ...(node.kind || "").split(" ").filter(Boolean));
   if (node.sharedZone) el.classList.add("shared-zone");
-  el.style.setProperty("--w", `${node.width}px`);
-  el.style.setProperty("--h", `${node.height}px`);
-  el.style.setProperty("--label-size", `${node.font}px`);
+  applyBubbleScale(node);
   el.querySelector(".bubbleLabel").textContent = node.text;
   el.title = node.title;
   const deleteButton = el.querySelector(".deleteBubble");
@@ -1932,6 +1930,33 @@ function renderNodes() {
 }
 function findNode(id) {
   return nodes.find(node => node.id === id);
+}
+
+// Responsive map scaling: keeps the upper diagram text and bubbles
+// in proportion when the tool is embedded in a narrower iframe.
+// Export remains drawn from the full node dimensions for legibility.
+function mapScale() {
+  const rect = mapArea.getBoundingClientRect();
+  if (!rect.width) return 1;
+  return Math.max(0.66, Math.min(1, rect.width / 1080));
+}
+function displayWidth(node) {
+  return node.width * mapScale();
+}
+function displayHeight(node) {
+  return node.height * mapScale();
+}
+function displayFont(node) {
+  return Math.max(8.2, node.font * mapScale());
+}
+function applyBubbleScale(node) {
+  if (!node.el) return;
+  const scale = mapScale();
+  node.el.style.setProperty("--w", `${node.width * scale}px`);
+  node.el.style.setProperty("--h", `${node.height * scale}px`);
+  node.el.style.setProperty("--label-size", `${Math.max(8.2, node.font * scale)}px`);
+  node.el.style.setProperty("--bubble-pad-y", `${Math.max(5, 8 * scale)}px`);
+  node.el.style.setProperty("--bubble-pad-x", `${Math.max(7, 11 * scale)}px`);
 }
 
 function startDrag(event, node) {
@@ -1998,6 +2023,7 @@ function tick(time) {
   drawLinks();
   for (const node of nodes) {
     if (!node.el) continue;
+    applyBubbleScale(node);
     node.el.style.left = `${node.x}px`;
     node.el.style.top = `${node.y}px`;
   }
@@ -2005,7 +2031,7 @@ function tick(time) {
 }
 
 function nodeRadius(node) {
-  return Math.max(node.width, node.height) / 2;
+  return Math.max(displayWidth(node), displayHeight(node)) / 2;
 }
 function linkTargetDistance(link) {
   if (link.targetRole === "response" || link.targetRole === "reflectionResponse") return 178;
@@ -2101,8 +2127,8 @@ function stepPhysics(dt) {
     node.vy *= 0.84;
     node.x += node.vx * dt * 5.6;
     node.y += node.vy * dt * 5.6;
-    const marginX = node.width / 2 + 8;
-    const marginY = node.height / 2 + 8;
+    const marginX = displayWidth(node) / 2 + 8;
+    const marginY = displayHeight(node) / 2 + 8;
     if (node.x < marginX) { node.x = marginX; node.vx *= -0.16; }
     if (node.x > rect.width - marginX) { node.x = rect.width - marginX; node.vx *= -0.16; }
     if (node.y < marginY) { node.y = marginY; node.vy *= -0.16; }
@@ -2123,33 +2149,38 @@ window.addEventListener("resize", () => {
   resizeCanvas();
   const rect = mapArea.getBoundingClientRect();
   for (const node of nodes) {
-    node.x = Math.max(node.width / 2, Math.min(rect.width - node.width / 2, node.x));
-    node.y = Math.max(node.height / 2, Math.min(rect.height - node.height / 2, node.y));
+    applyBubbleScale(node);
+    const w = displayWidth(node);
+    const h = displayHeight(node);
+    node.x = Math.max(w / 2, Math.min(rect.width - w / 2, node.x));
+    node.y = Math.max(h / 2, Math.min(rect.height - h / 2, node.y));
   }
 });
 
-function linkPointOnEdge(from, to) {
+function linkPointOnEdge(from, to, useDisplay = true) {
   const dx = to.x - from.x;
   const dy = to.y - from.y;
   const dist = Math.hypot(dx, dy) || 0.001;
   const ux = dx / dist;
   const uy = dy / dist;
+  const w = useDisplay ? displayWidth(from) : from.width;
+  const h = useDisplay ? displayHeight(from) : from.height;
   if ((from.kind || "").includes("circle")) {
-    const r = Math.max(from.width, from.height) / 2;
+    const r = Math.max(w, h) / 2;
     return { x: from.x + ux * r, y: from.y + uy * r };
   }
-  const halfW = from.width / 2;
-  const halfH = from.height / 2;
+  const halfW = w / 2;
+  const halfH = h / 2;
   const scale = Math.min(
     Math.abs(halfW / (ux || 0.0001)),
     Math.abs(halfH / (uy || 0.0001))
   );
   return { x: from.x + ux * scale, y: from.y + uy * scale };
 }
-function linkEndpoints(a, b) {
+function linkEndpoints(a, b, useDisplay = true) {
   return {
-    start: linkPointOnEdge(a, b),
-    end: linkPointOnEdge(b, a)
+    start: linkPointOnEdge(a, b, useDisplay),
+    end: linkPointOnEdge(b, a, useDisplay)
   };
 }
 
@@ -2234,7 +2265,7 @@ function downloadDiagramPng() {
     const a = findNode(link.source);
     const b = findNode(link.target);
     if (!a || !b) continue;
-    const { start, end } = linkEndpoints(a, b);
+    const { start, end } = linkEndpoints(a, b, false);
     o.beginPath();
     o.moveTo(start.x, start.y);
     const cx = (start.x + end.x) / 2 + Math.sin((start.y + end.y) * .02) * 12;
