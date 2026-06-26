@@ -2197,9 +2197,7 @@ function drawLinks() {
     const { start, end } = linkEndpoints(a, b);
     ctx.beginPath();
     ctx.moveTo(start.x, start.y);
-    const cx = (start.x + end.x) / 2 + Math.sin((start.y + end.y) * .02) * 14;
-    const cy = (start.y + end.y) / 2 + Math.cos((start.x + end.x) * .02) * 10;
-    ctx.quadraticCurveTo(cx, cy, end.x, end.y);
+    ctx.lineTo(end.x, end.y);
     ctx.strokeStyle = selected ? "rgba(0,0,0,.48)" : "rgba(0,0,0,.26)";
     ctx.stroke();
   }
@@ -2374,9 +2372,7 @@ function downloadDiagramPng() {
     const { start, end } = exportLinkEndpoints(a, b);
     o.beginPath();
     o.moveTo(start.x, start.y);
-    const cx = (start.x + end.x) / 2 + Math.sin((start.y + end.y) * .02) * 12;
-    const cy = (start.y + end.y) / 2 + Math.cos((start.x + end.x) * .02) * 10;
-    o.quadraticCurveTo(cx, cy, end.x, end.y);
+    o.lineTo(end.x, end.y);
     o.strokeStyle = "rgba(0,0,0,.34)";
     o.lineWidth = 0.85;
     o.stroke();
