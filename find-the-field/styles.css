@@ -3,8 +3,8 @@
   --muted: rgba(0,0,0,.56);
   --line: rgba(0,0,0,.82);
   --line-soft: rgba(0,0,0,.32);
-  --field: rgba(255,255,255,.82);
-  --field-focus: rgba(255,255,255,.96);
+  --field: rgba(255,255,255,.86);
+  --field-focus: rgba(255,255,255,.98);
   --sans: Arial, Helvetica, sans-serif;
 }
 
@@ -41,9 +41,9 @@ body {
 
 .toolShell {
   position: relative;
-  aspect-ratio: 1021 / 941;
+  aspect-ratio: auto;
   width: 100%;
-  min-height: 980px;
+  min-height: 1160px;
 }
 .baseLayer {
   position: absolute;
@@ -52,7 +52,7 @@ body {
   height: 100%;
   z-index: 1;
   pointer-events: none;
-  opacity: 1;
+  opacity: 0;
   filter: none;
 }
 
@@ -61,12 +61,13 @@ body {
   left: 3.25%;
   top: 2.3%;
   width: 93.5%;
-  height: 71.3%;
+  height: 69%;
   z-index: 3;
   overflow: hidden;
   border-radius: 4px;
-  background: transparent;
+  background: rgba(255,255,255,.04);
   border: .25px solid #000;
+  box-shadow: 3px 5px 12px rgba(0,0,0,.20);
   box-shadow: 3px 5px 12px rgba(0,0,0,.20);
 }
 .mapArea::before { content: none; }
@@ -103,9 +104,9 @@ body {
 .entryForm {
   position: absolute;
   left: 7.6%;
-  top: 80.4%;
+  top: 76.5%;
   width: 84.8%;
-  height: 26.6%;
+  height: 16.9%;
   z-index: 4;
   display: grid;
   grid-template-columns: 17% 25.5% 25.5% 17% 9%;
@@ -113,6 +114,17 @@ body {
   column-gap: 1.55%;
   row-gap: 5.8%;
   align-items: stretch;
+  padding: 0;
+}
+.entryForm::before {
+  content: "";
+  position: absolute;
+  inset: -42px -46px -46px -46px;
+  border-radius: 5px;
+  background: rgba(140,140,140,.64);
+  border: .25px solid rgba(0,0,0,.32);
+  box-shadow: 3px 5px 14px rgba(0,0,0,.18);
+  z-index: -1;
 }
 .field {
   position: relative;
@@ -281,7 +293,7 @@ body {
 .utilityButtons {
   position: absolute;
   left: 50%;
-  top: 98.15%;
+  top: 96.5%;
   transform: translateX(-50%);
   width: auto;
   z-index: 4;
@@ -372,11 +384,11 @@ body {
 
 @media (max-width: 760px) {
   .app { width: min(100vw - 18px, 1180px); margin-top: 14px; }
-  .toolShell { min-height: 920px; aspect-ratio: auto; }
+  .toolShell { min-height: 1120px; aspect-ratio: auto; }
   .baseLayer { display: none; }
-  .mapArea { left: 0; top: 80px; width: 100%; height: 55%; border: .25px solid #000; }
+  .mapArea { left: 0; top: 80px; width: 100%; height: 58%; border: .25px solid #000; }
   .entryForm {
-    left: 0; top: calc(55% + 102px); width: 100%; height: auto;
+    left: 0; top: calc(58% + 116px); width: 100%; height: auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: none;
