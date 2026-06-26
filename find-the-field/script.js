@@ -2242,8 +2242,113 @@ function drawWrappedText(context, text, x, y, w, fontSize, color, maxLines = 5) 
   const startY = y - ((lines.length - 1) * lineHeight) / 2;
   lines.forEach((line, i) => context.fillText(line, x, startY + i * lineHeight));
 }
+function exportLinkEndpoints(a, b) {
+  return {
+    start: linkPointOnEdge(a, b, false),
+    end: linkPointOnEdge(b, a, false)
+  };
+}
+function relaxedExportNodes(rect) {
+  const exportNodes = nodes.map(node => ({
+    ...node,
+    x: Math.max(node.width / 2 + 6, Math.min(rect.width - node.width / 2 - 6, node.x)),
+    y: Math.max(node.height / 2 + 6, Math.min(rect.height - node.height / 2 - 6, node.y)),
+    vx: 0,
+    vy: 0
+  }));
+  const byId = new Map(exportNodes.map(node => [node.id, node]));
+  const findExportNode = id => byId.get(id);
+
+  const margin = 10;
+  const exportRadius = node => Math.max(node.width, node.height) / 2;
+
+  for (let step = 0; step < 520; step++) {
+    // Keep connected ideas in conversation, but looser than the live map.
+    for (const link of links) {
+      const a = findExportNode(link.source);
+      const b = findExportNode(link.target);
+      if (!a || !b) continue;
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const dist = Math.hypot(dx, dy) || 0.001;
+      const desired = linkTargetDistance(link) + 26;
+      const force = (dist - desired) * 0.00095;
+      const fx = (dx / dist) * force;
+      const fy = (dy / dist) * force;
+      a.vx += fx;
+      a.vy += fy;
+      b.vx -= fx;
+      b.vy -= fy;
+    }
+
+    // Strong export-only overlap resolution using each bubble's actual box.
+    for (let i = 0; i < exportNodes.length; i++) {
+      for (let j = i + 1; j < exportNodes.length; j++) {
+        const a = exportNodes[i];
+        const b = exportNodes[j];
+        const dx = b.x - a.x || (Math.random() - 0.5) * 0.01;
+        const dy = b.y - a.y || (Math.random() - 0.5) * 0.01;
+        const absX = Math.abs(dx);
+        const absY = Math.abs(dy);
+        const pad = a.entryId === b.entryId ? 20 : 30;
+        const overlapX = (a.width / 2 + b.width / 2 + pad) - absX;
+        const overlapY = (a.height / 2 + b.height / 2 + pad) - absY;
+
+        if (overlapX > 0 && overlapY > 0) {
+          const sx = dx < 0 ? -1 : 1;
+          const sy = dy < 0 ? -1 : 1;
+          if (overlapX < overlapY) {
+            const push = overlapX * 0.027;
+            a.vx -= sx * push;
+            b.vx += sx * push;
+          } else {
+            const push = overlapY * 0.027;
+            a.vy -= sy * push;
+            b.vy += sy * push;
+          }
+        }
+
+        // A softer radial repulsion helps separate large circular category nodes.
+        const dist = Math.hypot(dx, dy) || 0.001;
+        const desired = exportRadius(a) + exportRadius(b) + pad;
+        if (dist < desired) {
+          const push = (desired - dist) * 0.0065;
+          const nx = dx / dist;
+          const ny = dy / dist;
+          a.vx -= nx * push;
+          a.vy -= ny * push;
+          b.vx += nx * push;
+          b.vy += ny * push;
+        }
+      }
+    }
+
+    // Very gentle pull toward the field centre so the export does not scatter too far.
+    for (const node of exportNodes) {
+      node.vx += (rect.width * 0.5 - node.x) * 0.000018;
+      node.vy += (rect.height * 0.5 - node.y) * 0.000018;
+      node.vx *= 0.82;
+      node.vy *= 0.82;
+      node.x += node.vx;
+      node.y += node.vy;
+
+      const minX = node.width / 2 + margin;
+      const maxX = rect.width - node.width / 2 - margin;
+      const minY = node.height / 2 + margin;
+      const maxY = rect.height - node.height / 2 - margin;
+      if (node.x < minX) { node.x = minX; node.vx *= -0.15; }
+      if (node.x > maxX) { node.x = maxX; node.vx *= -0.15; }
+      if (node.y < minY) { node.y = minY; node.vy *= -0.15; }
+      if (node.y > maxY) { node.y = maxY; node.vy *= -0.15; }
+    }
+  }
+
+  return { exportNodes, findExportNode };
+}
+
 function downloadDiagramPng() {
   const rect = mapArea.getBoundingClientRect();
+  const { exportNodes, findExportNode } = relaxedExportNodes(rect);
   const scale = 2;
   const out = document.createElement("canvas");
   out.width = Math.floor(rect.width * scale);
@@ -2261,11 +2366,12 @@ function downloadDiagramPng() {
   o.lineWidth = 0.35;
   o.stroke();
   o.restore();
+
   for (const link of links) {
-    const a = findNode(link.source);
-    const b = findNode(link.target);
+    const a = findExportNode(link.source);
+    const b = findExportNode(link.target);
     if (!a || !b) continue;
-    const { start, end } = linkEndpoints(a, b, false);
+    const { start, end } = exportLinkEndpoints(a, b);
     o.beginPath();
     o.moveTo(start.x, start.y);
     const cx = (start.x + end.x) / 2 + Math.sin((start.y + end.y) * .02) * 12;
@@ -2275,7 +2381,8 @@ function downloadDiagramPng() {
     o.lineWidth = 0.85;
     o.stroke();
   }
-  for (const node of nodes) {
+
+  for (const node of exportNodes) {
     const x = node.x - node.width / 2;
     const y = node.y - node.height / 2;
     const isCircle = node.kind.includes("circle");
@@ -2296,6 +2403,7 @@ function downloadDiagramPng() {
     o.restore();
     drawWrappedText(o, node.text, node.x, node.y, node.width - 18, node.font, "rgba(0,0,0,.92)", isCircle ? 4 : 6);
   }
+
   const a = document.createElement("a");
   a.href = out.toDataURL("image/png");
   a.download = "find-the-field-diagram.png";
