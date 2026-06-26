@@ -3,82 +3,31 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Find the Field</title>
+  <title>Search the Field</title>
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main class="app" aria-labelledby="appTitle">
-    <header class="titleBlock">
-      <h1 id="appTitle">Find the Field</h1>
-      <p>Your responses become the map.</p>
-    </header>
+  <main class="tool-wrap" aria-label="Search the Field">
+    <section class="stage">
+      <div class="stage-inner">
+      <h1 class="tool-title">Search the Field</h1>
+      <img class="layer base" src="assets/01-base.svg" alt="" aria-hidden="true" />
+      <svg id="lines" class="lines" viewBox="0 0 960.87 965" aria-hidden="true"></svg>
+      <div id="network" class="network" aria-label="Concept word web"></div>
+      <label class="visually-hidden" for="searchTerm">Search term</label>
+      <input id="searchTerm" class="search-input" type="text" placeholder="type a search term or select from above" autocomplete="off" />
+      <button id="searchBtn" class="search-button" type="button" aria-label="Search selected resource">Search</button>
 
-    <section class="toolShell" aria-label="Find the Field interactive tool">
-      <img class="baseLayer" src="01-base-shape.svg" alt="" aria-hidden="true" />
+      <button class="category-button collections" data-category="collections" type="button" aria-label="Search collections">Search collections</button>
+      <button class="category-button channels" data-category="channels" type="button" aria-label="Search channels">Search channels</button>
+      <button class="category-button writing" data-category="writing" type="button" aria-label="Search writing">Search writing</button>
+      <button id="resetBtn" class="reset-button" type="button" aria-label="Reset">Reset</button>
 
-      <section id="mapArea" class="mapArea" aria-label="Diagram area">
-        <canvas id="linksCanvas" class="linksCanvas" aria-hidden="true"></canvas>
-        <div id="mapHint" class="mapHint">
-          Add a response below to begin building your field. Drag ideas into relation.
-        </div>
-        <div id="bubbleLayer" class="bubbleLayer" aria-live="polite"></div>
-      </section>
-
-      <form id="entryForm" class="entryForm" autocomplete="off">
-        <div class="field field-zone">
-          <label for="zoneInput">Zone</label>
-          <textarea id="zoneInput" placeholder="Choose a zone">Themes</textarea>
-        </div>
-
-        <div class="field field-question">
-          <label for="questionInput">Initial question</label>
-          <textarea id="questionInput" placeholder="Choose or write a question"></textarea>
-        </div>
-
-        <div class="field field-reflection">
-          <label for="reflectionInput">Reflection</label>
-          <textarea id="reflectionInput" placeholder="Choose or write a reflection"></textarea>
-        </div>
-
-        <div class="field field-set">
-          <label for="setInput">Category</label>
-          <textarea id="setInput" placeholder="Optional"></textarea>
-        </div>
-
-        <div class="field area-response">
-          <label for="responseInput">Response</label>
-          <textarea id="responseInput" placeholder="Write a sentence, phrase, list, or fragment."></textarea>
-        </div>
-
-        <div class="field area-reflection-response">
-          <label for="reflectionResponseInput">Response</label>
-          <textarea id="reflectionResponseInput" placeholder="Stretch the response: why might it matter, how does it appear, or where might it lead?"></textarea>
-        </div>
-
-        <div class="field field-subset">
-          <label for="subsetInput">Term</label>
-          <textarea id="subsetInput" placeholder="Optional"></textarea>
-        </div>
-
-
-        <button id="addButton" class="addButton" type="submit" aria-label="Add current entry to the map">+</button>
-      </form>
-
-      <div class="utilityButtons" aria-label="Map actions">
-        <button id="clearCurrent" type="button">Clear current entry</button>
-        <button id="clearMap" type="button">Clear map</button>
-        <button id="downloadMap" type="button">Download diagram PNG</button>
+      <div id="resourceMenu" class="resource-menu" aria-live="polite"></div>
+      <div id="statusText" class="status-text" aria-live="polite">Type a term or choose one from the word web.</div>
       </div>
     </section>
   </main>
-
-  <template id="bubbleTemplate">
-    <article class="bubble" tabindex="0">
-      <button class="deleteBubble" type="button" aria-label="Remove this map entry">×</button>
-      <div class="bubbleLabel"></div>
-    </article>
-  </template>
-
   <script src="script.js"></script>
 </body>
 </html>
