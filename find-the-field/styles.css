@@ -3,8 +3,8 @@
   --muted: rgba(0,0,0,.56);
   --line: rgba(0,0,0,.82);
   --line-soft: rgba(0,0,0,.32);
-  --field: rgba(255,255,255,.34);
-  --field-focus: rgba(255,255,255,.54);
+  --field: rgba(255,255,255,.82);
+  --field-focus: rgba(255,255,255,.96);
   --sans: Arial, Helvetica, sans-serif;
 }
 
@@ -43,7 +43,7 @@ body {
   position: relative;
   aspect-ratio: 1021 / 941;
   width: 100%;
-  min-height: 720px;
+  min-height: 980px;
 }
 .baseLayer {
   position: absolute;
@@ -61,7 +61,7 @@ body {
   left: 3.25%;
   top: 2.3%;
   width: 93.5%;
-  height: 53.45%;
+  height: 71.3%;
   z-index: 3;
   overflow: hidden;
   border-radius: 4px;
@@ -103,7 +103,7 @@ body {
 .entryForm {
   position: absolute;
   left: 7.6%;
-  top: 63.7%;
+  top: 80.4%;
   width: 84.8%;
   height: 26.6%;
   z-index: 4;
@@ -146,8 +146,8 @@ body {
   background: var(--field);
   box-shadow:
     inset 0 1px 9px rgba(255,255,255,.22),
-    inset 0 -7px 15px rgba(0,0,0,.055),
-    1px 2px 5px rgba(0,0,0,.13);
+    inset 0 -5px 12px rgba(0,0,0,.025),
+    1px 2px 5px rgba(0,0,0,.08);
   color: #111;
   font: 13px/1.18 var(--sans);
   padding: 8px 10px;
@@ -281,7 +281,7 @@ body {
 .utilityButtons {
   position: absolute;
   left: 50%;
-  top: 95.25%;
+  top: 98.15%;
   transform: translateX(-50%);
   width: auto;
   z-index: 4;
@@ -374,9 +374,9 @@ body {
   .app { width: min(100vw - 18px, 1180px); margin-top: 14px; }
   .toolShell { min-height: 920px; aspect-ratio: auto; }
   .baseLayer { display: none; }
-  .mapArea { left: 0; top: 80px; width: 100%; height: 46%; border: .25px solid #000; }
+  .mapArea { left: 0; top: 80px; width: 100%; height: 55%; border: .25px solid #000; }
   .entryForm {
-    left: 0; top: calc(46% + 102px); width: 100%; height: auto;
+    left: 0; top: calc(55% + 102px); width: 100%; height: auto;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: none;
@@ -411,8 +411,8 @@ body {
 .field textarea:focus {
   box-shadow:
     inset 0 1px 11px rgba(255,255,255,.28),
-    inset 0 -8px 16px rgba(0,0,0,.06),
-    1px 2px 7px rgba(0,0,0,.16),
+    inset 0 -5px 14px rgba(0,0,0,.03),
+    1px 2px 7px rgba(0,0,0,.10),
     0 0 0 1px rgba(0,0,0,.08);
 }
 
