@@ -149,21 +149,21 @@ body {
     };
 
     function setup() {
-      const holder = document.getElementById("diagram-holder");
-      canvasSize = Math.min(holder.offsetWidth, 760);
-      const cnv = createCanvas(canvasSize, canvasSize);
-      cnv.parent("diagram-holder");
+  const holder = document.getElementById("diagram-holder");
+  canvasSize = Math.min(holder.offsetWidth, 680);
+  const cnv = createCanvas(canvasSize, canvasSize);
+  cnv.parent("diagram-holder");
 
-      textFont("Arial");
-      initNodes();
-    }
+  textFont("Arial");
+  initNodes();
+}
 
-    function windowResized() {
-      const holder = document.getElementById("diagram-holder");
-      canvasSize = Math.min(holder.offsetWidth, 760);
-      resizeCanvas(canvasSize, canvasSize);
-      constrainAllNodes();
-    }
+function windowResized() {
+  const holder = document.getElementById("diagram-holder");
+  canvasSize = Math.min(holder.offsetWidth, 680);
+  resizeCanvas(canvasSize, canvasSize);
+  constrainAllNodes();
+}
 
     function initNodes() {
       nodes = [];
