@@ -25,7 +25,9 @@ body {
   background: var(--bg);
   font-family: Arial, Helvetica, sans-serif;
   color: var(--ink);
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  min-height: 900px;
 }
 
     .encounter-wrap {
@@ -148,23 +150,32 @@ body {
       text: "The artwork is the field of encounter. It gathers artists, materials and audiences into a shared situation."
     };
 
-    function setup() {
+    function safeCanvasSize() {
   const holder = document.getElementById("diagram-holder");
-  canvasSize = Math.min(holder.offsetWidth, 680);
+  const availableWidth = holder.offsetWidth || window.innerWidth || 680;
+  return Math.min(availableWidth, 680);
+}
+
+function setup() {
+  canvasSize = safeCanvasSize();
   const cnv = createCanvas(canvasSize, canvasSize);
   cnv.parent("diagram-holder");
 
   textFont("Arial");
   initNodes();
+
+  setTimeout(() => {
+    canvasSize = safeCanvasSize();
+    resizeCanvas(canvasSize, canvasSize);
+    constrainAllNodes();
+  }, 250);
 }
 
 function windowResized() {
-  const holder = document.getElementById("diagram-holder");
-  canvasSize = Math.min(holder.offsetWidth, 680);
+  canvasSize = safeCanvasSize();
   resizeCanvas(canvasSize, canvasSize);
   constrainAllNodes();
 }
-
     function initNodes() {
       nodes = [];
       cx = width / 2;
