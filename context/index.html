@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Context Diagram</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.min.js"></script>
+
+  <style>
+    :root {
+      --ink: #111;
+      --muted: #666;
+      --bg: transparent;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      overflow-y: hidden;
+      min-height: 900px;
+    }
+
+    .context-wrap {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 18px 16px 24px;
+      transform-origin: top center;
+    }
+
+    #diagram-holder {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      touch-action: none;
+    }
+
+    .hover-panel {
+      max-width: 720px;
+      min-height: 120px;
+      margin: 22px auto 0;
+      border-top: 1.5px solid #111;
+      padding-top: 18px;
+      text-align: center;
+    }
+
+    .hover-title {
+      font-size: clamp(18px, 2.4vw, 26px);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hover-text {
+      font-size: clamp(14px, 1.8vw, 17px);
+      line-height: 1.45;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .instruction {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="context-wrap">
+    <div id="diagram-holder"></div>
+
+    <div class="hover-panel" aria-live="polite">
+      <div class="hover-title" id="hoverTitle">Context / Field</div>
+      <p class="hover-text" id="hoverText">
+        Context is the field your work is already part of. It gathers ideas, materials and practices into shared cultural, historical, geographical and social situations.
+      </p>
+      <div class="instruction">
+        Hover, tap, click and drag the bubbles. Select Ideas, Materials or Practices to reveal connected terms.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let nodes = [];
+    let activeGroup = null;
+    let draggedNode = null;
+    let hoveredNode = null;
+
+    let cx, cy, fieldR;
+    let canvasSize;
+
+    const hoverTitle = document.getElementById("hoverTitle");
+    const hoverText = document.getElementById("hoverText");
+
+    const mainData = [
+      {
+        id: "ideas",
+        label: "Ideas",
+        type: "main",
+        text: "Ideas have discourses, questions, references and conversations. They connect your work to broader ways of thinking, arguing, imagining and making meaning.",
+        terms: [
+          ["discourses", "What conversations, debates or fields of thought does your work touch?"],
+          ["questions", "What questions does your work ask, inherit, reopen or complicate?"],
+          ["references", "What artists, texts, images, exhibitions or examples help frame your thinking?"],
+          ["concepts", "What key ideas help you understand what your work is doing?"],
+          ["positions", "What stance, relation or point of view does your work begin from?"]
+        ]
+      },
+      {
+        id: "materials",
+        label: "Materials",
+        type: "main",
+        text: "Materials have histories, geographies, uses, economies and associations. They carry meanings before you begin working with them.",
+        terms: [
+          ["histories", "What histories, traditions or previous uses are carried by this material?"],
+          ["geographies", "Where does the material come from, and what places or systems does it connect to?"],
+          ["associations", "What cultural, domestic, industrial or personal meanings might the material suggest?"],
+          ["ecologies", "What environmental, extractive, living or non-living systems does the material belong to?"],
+          ["uses", "How is this material used outside your artwork: in industry, craft, ritual, design or daily life?"]
+        ]
+      },
+      {
+        id: "practices",
+        label: "Practices",
+        type: "main",
+        text: "Practices include processes, techniques, tools, traditions and communities of practice. Your way of making is already connected to other makers and histories.",
+        terms: [
+          ["techniques", "What techniques, skills or procedures does your work draw on?"],
+          ["traditions", "What artistic, craft, cultural or technical traditions does your process connect to?"],
+          ["tools", "What tools, equipment, software or systems shape what can be made?"],
+          ["communities", "Who else works with these methods, materials or concerns?"],
+          ["methods", "What repeated actions, experiments or decisions form your way of working?"]
+        ]
+      }
+    ];
+
+    const siteText = {
+      title: "Context / Field",
+      text: "Context is the field your work is already part of. It gathers ideas, materials and practices into shared cultural, historical, geographical and social situations."
+    };
+
+    function safeCanvasSize() {
+      const holder = document.getElementById("diagram-holder");
+      const availableWidth = holder.offsetWidth || window.innerWidth || 680;
+      return Math.min(availableWidth, 680);
+    }
+
+    function setup() {
+      canvasSize = safeCanvasSize();
+      const cnv = createCanvas(canvasSize, canvasSize);
+      cnv.parent("diagram-holder");
+
+      textFont("Arial");
+      initNodes();
+
+      setTimeout(() => {
+        canvasSize = safeCanvasSize();
+        resizeCanvas(canvasSize, canvasSize);
+        constrainAllNodes();
+      }, 250);
+    }
+
+    function windowResized() {
+      canvasSize = safeCanvasSize();
+      resizeCanvas(canvasSize, canvasSize);
+      constrainAllNodes();
+    }
+
+    function initNodes() {
+      nodes = [];
+      cx = width / 2;
+      cy = height / 2;
+      fieldR = width * 0.43;
+
+      const positions = [
+        { x: cx, y: cy - fieldR * 0.42 },
+        { x: cx - fieldR * 0.42, y: cy + fieldR * 0.25 },
+        { x: cx + fieldR * 0.42, y: cy + fieldR * 0.25 }
+      ];
+
+      mainData.forEach((d, i) => {
+        nodes.push(new Bubble({
+          id: d.id,
+          label: d.label,
+          type: "main",
+          group: d.id,
+          x: positions[i].x,
+          y: positions[i].y,
+          r: width * 0.105,
+          text: d.text,
+          visible: true
+        }));
+      });
+
+      mainData.forEach((group, groupIndex) => {
+        const angleStart = [-HALF_PI, PI * 0.82, PI * 0.18][groupIndex];
+
+        group.terms.forEach((term, i) => {
+          const angle = angleStart + map(i, 0, group.terms.length - 1, -0.68, 0.68);
+          const parent = nodes.find(n => n.id === group.id);
+          const dist = fieldR * 0.42;
+
+          nodes.push(new Bubble({
+            id: `${group.id}-${term[0]}`,
+            label: term[0],
+            type: "term",
+            group: group.id,
+            x: parent.x + cos(angle) * dist,
+            y: parent.y + sin(angle) * dist,
+            r: width * 0.066,
+            text: term[1],
+            visible: false
+          }));
+        });
+      });
+    }
+
+    function draw() {
+      clear();
+
+      cx = width / 2;
+      cy = height / 2;
+      fieldR = width * 0.43;
+
+      updateHover();
+
+      drawContextField();
+
+      if (activeGroup) {
+        drawConnections();
+      }
+
+      applyPhysics();
+
+      nodes.forEach(node => {
+        if (node.visible) node.display();
+      });
+    }
+
+    function drawContextField() {
+      push();
+      noFill();
+      stroke(17, 17, 17, 150);
+      strokeWeight(1.6);
+      ellipse(cx, cy, fieldR * 2, fieldR * 2);
+
+      noStroke();
+      fill(17, 17, 17, 165);
+      textAlign(CENTER, CENTER);
+      textSize(width * 0.028);
+      textStyle(NORMAL);
+      text("Context / Field", cx, cy);
+      textSize(width * 0.017);
+      fill(17, 17, 17, 105);
+      text("the work is already situated", cx, cy + width * 0.035);
+      pop();
+    }
+
+    function drawConnections() {
+      const parent = nodes.find(n => n.id === activeGroup);
+      if (!parent) return;
+
+      push();
+      stroke(17, 17, 17, 120);
+      strokeWeight(1.2);
+
+      nodes.forEach(node => {
+        if (node.group === activeGroup && node.type === "term" && node.visible) {
+          line(parent.x, parent.y, node.x, node.y);
+        }
+      });
+
+      pop();
+    }
+
+    function applyPhysics() {
+      const visibleNodes = nodes.filter(n => n.visible);
+
+      visibleNodes.forEach(node => {
+        if (node !== draggedNode) {
+          node.vx += random(-0.012, 0.012);
+          node.vy += random(-0.012, 0.012);
+        }
+      });
+
+      for (let i = 0; i < visibleNodes.length; i++) {
+        for (let j = i + 1; j < visibleNodes.length; j++) {
+          repel(visibleNodes[i], visibleNodes[j]);
+        }
+      }
+
+      if (activeGroup) {
+        const parent = nodes.find(n => n.id === activeGroup);
+
+        nodes.forEach(node => {
+          if (node.group === activeGroup && node.type === "term" && node.visible) {
+            spring(node, parent, fieldR * 0.34, 0.0025);
+          }
+        });
+      }
+
+      visibleNodes.forEach(node => {
+        if (node !== draggedNode) {
+          node.x += node.vx;
+          node.y += node.vy;
+        }
+
+        node.vx *= 0.92;
+        node.vy *= 0.92;
+
+        keepInsideField(node);
+      });
+    }
+
+    function repel(a, b) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const d = max(0.001, sqrt(dx * dx + dy * dy));
+      const minDist = a.r + b.r + width * 0.018;
+
+      if (d < minDist) {
+        const force = (minDist - d) * 0.006;
+        const fx = (dx / d) * force;
+        const fy = (dy / d) * force;
+
+        if (a !== draggedNode) {
+          a.vx -= fx;
+          a.vy -= fy;
+        }
+
+        if (b !== draggedNode) {
+          b.vx += fx;
+          b.vy += fy;
+        }
+      }
+    }
+
+    function spring(a, b, target, strength) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const d = max(0.001, sqrt(dx * dx + dy * dy));
+      const stretch = d - target;
+
+      const fx = (dx / d) * stretch * strength;
+      const fy = (dy / d) * stretch * strength;
+
+      if (a !== draggedNode) {
+        a.vx += fx;
+        a.vy += fy;
+      }
+
+      if (b !== draggedNode) {
+        b.vx -= fx * 0.25;
+        b.vy -= fy * 0.25;
+      }
+    }
+
+    function keepInsideField(node) {
+      const dx = node.x - cx;
+      const dy = node.y - cy;
+      const d = sqrt(dx * dx + dy * dy);
+      const maxD = fieldR - node.r - 3;
+
+      if (d > maxD) {
+        const angle = atan2(dy, dx);
+        node.x = cx + cos(angle) * maxD;
+        node.y = cy + sin(angle) * maxD;
+
+        node.vx *= -0.22;
+        node.vy *= -0.22;
+      }
+    }
+
+    function constrainAllNodes() {
+      nodes.forEach(n => {
+        n.r = n.type === "main" ? width * 0.105 : width * 0.066;
+        keepInsideField(n);
+      });
+    }
+
+    function updateHover() {
+      hoveredNode = null;
+
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const node = nodes[i];
+
+        if (node.visible && dist(mouseX, mouseY, node.x, node.y) < node.r) {
+          hoveredNode = node;
+          break;
+        }
+      }
+
+      if (!draggedNode) {
+        if (hoveredNode) {
+          setHoverText(hoveredNode.label, hoveredNode.text);
+        } else if (dist(mouseX, mouseY, cx, cy) < fieldR) {
+          setHoverText(siteText.title, siteText.text);
+        }
+      }
+    }
+
+    function setHoverText(title, textContent) {
+      hoverTitle.textContent = title;
+      hoverText.textContent = textContent;
+    }
+
+    function mousePressed() {
+      selectNode(mouseX, mouseY);
+      return false;
+    }
+
+    function touchStarted() {
+      selectNode(mouseX, mouseY);
+      return false;
+    }
+
+    function selectNode(x, y) {
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const node = nodes[i];
+
+        if (node.visible && dist(x, y, node.x, node.y) < node.r) {
+          draggedNode = node;
+          node.dragOffsetX = node.x - x;
+          node.dragOffsetY = node.y - y;
+
+          setHoverText(node.label, node.text);
+
+          if (node.type === "main") {
+            activateGroup(node.group);
+          }
+
+          return;
+        }
+      }
+
+      if (dist(x, y, cx, cy) < fieldR) {
+        setHoverText(siteText.title, siteText.text);
+      }
+    }
+
+    function mouseDragged() {
+      dragSelected(mouseX, mouseY);
+      return false;
+    }
+
+    function touchMoved() {
+      dragSelected(mouseX, mouseY);
+      return false;
+    }
+
+    function dragSelected(x, y) {
+      if (draggedNode) {
+        draggedNode.x = x + draggedNode.dragOffsetX;
+        draggedNode.y = y + draggedNode.dragOffsetY;
+        draggedNode.vx *= 0.4;
+        draggedNode.vy *= 0.4;
+        keepInsideField(draggedNode);
+      }
+    }
+
+    function mouseReleased() {
+      draggedNode = null;
+      return false;
+    }
+
+    function touchEnded() {
+      draggedNode = null;
+      return false;
+    }
+
+    function activateGroup(groupName) {
+      activeGroup = groupName;
+
+      nodes.forEach(node => {
+        if (node.type === "term") {
+          node.visible = node.group === groupName;
+        }
+      });
+
+      const parent = nodes.find(n => n.id === groupName);
+      const terms = nodes.filter(n => n.type === "term" && n.group === groupName);
+
+      terms.forEach((node, i) => {
+        const angle = TWO_PI * (i / terms.length) - HALF_PI;
+        const targetX = parent.x + cos(angle) * fieldR * 0.34;
+        const targetY = parent.y + sin(angle) * fieldR * 0.34;
+
+        node.x = lerp(node.x, targetX, 0.45);
+        node.y = lerp(node.y, targetY, 0.45);
+        keepInsideField(node);
+      });
+    }
+
+    class Bubble {
+      constructor({ id, label, type, group, x, y, r, text, visible }) {
+        this.id = id;
+        this.label = label;
+        this.type = type;
+        this.group = group;
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.text = text;
+        this.visible = visible;
+        this.vx = random(-0.35, 0.35);
+        this.vy = random(-0.35, 0.35);
+        this.dragOffsetX = 0;
+        this.dragOffsetY = 0;
+      }
+
+      display() {
+        const isHover = hoveredNode === this;
+        const isActive = this.type === "main" && activeGroup === this.group;
+        const isInverted = isHover || isActive;
+
+        push();
+
+        stroke(17, 17, 17, isInverted ? 230 : 170);
+        strokeWeight(isActive ? 1.8 : 1.25);
+
+        if (isInverted) {
+          fill(17, 17, 17, 245);
+        } else {
+          fill(255, 255, 255, 225);
+        }
+
+        ellipse(this.x, this.y, this.r * 2, this.r * 2);
+
+        noStroke();
+
+        if (isInverted) {
+          fill(255, 255, 255, 245);
+        } else {
+          fill(17, 17, 17, 235);
+        }
+
+        textAlign(CENTER, CENTER);
+        textStyle(NORMAL);
+
+        if (this.type === "main") {
+          textSize(width * 0.026);
+        } else {
+          textSize(width * 0.017);
+        }
+
+        wrapText(
+          this.label,
+          this.x,
+          this.y,
+          this.r * 1.45,
+          this.type === "main" ? width * 0.032 : width * 0.022
+        );
+
+        pop();
+      }
+    }
+
+    function wrapText(str, x, y, maxWidth, lineHeight) {
+      const words = str.split(" ");
+      let lines = [];
+      let line = "";
+
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + " ";
+        if (textWidth(testLine) > maxWidth && i > 0) {
+          lines.push(line.trim());
+          line = words[i] + " ";
+        } else {
+          line = testLine;
+        }
+      }
+
+      lines.push(line.trim());
+
+      const startY = y - ((lines.length - 1) * lineHeight) / 2;
+
+      lines.forEach((l, index) => {
+        text(l, x, startY + index * lineHeight);
+      });
+    }
+  </script>
+</body>
+</html>
