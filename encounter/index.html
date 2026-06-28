@@ -388,22 +388,26 @@ function windowResized() {
       });
     }
 
-    function updateHover() {
-      hoveredNode = null;
+function updateHover() {
+  hoveredNode = null;
 
-      for (let i = nodes.length - 1; i >= 0; i--) {
-        const node = nodes[i];
-        if (node.visible && dist(mouseX, mouseY, node.x, node.y) < node.r) {
-          hoveredNode = node;
-          break;
-        }
-      }
+  for (let i = nodes.length - 1; i >= 0; i--) {
+    const node = nodes[i];
 
-      if (hoveredNode && !draggedNode) {
-        setHoverText(hoveredNode.label, hoveredNode.text);
-      }
+    if (node.visible && dist(mouseX, mouseY, node.x, node.y) < node.r) {
+      hoveredNode = node;
+      break;
     }
+  }
 
+  if (!draggedNode) {
+    if (hoveredNode) {
+      setHoverText(hoveredNode.label, hoveredNode.text);
+    } else if (dist(mouseX, mouseY, cx, cy) < fieldR) {
+      setHoverText(siteText.title, siteText.text);
+    }
+  }
+}
     function setHoverText(title, textContent) {
       hoverTitle.textContent = title;
       hoverText.textContent = textContent;
