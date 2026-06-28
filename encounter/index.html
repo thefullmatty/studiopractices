@@ -1,381 +1,560 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Encounter Diagram</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Encounter Diagram</title>
 
-<style>
-  :root {
-    --bg: transparent;
-    --ink: #111;
-    --muted: #666;
-    --line: #111;
-    --soft: rgba(0, 0, 0, 0.08);
-    --circle: rgba(255, 255, 255, 0.9);
-    --active: rgba(0, 0, 0, 0.06);
-  }
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.4/p5.min.js"></script>
 
-  * {
-    box-sizing: border-box;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--ink);
-  }
-
-  .encounter-wrapper {
-    width: 100%;
-    max-width: 920px;
-    margin: 0 auto;
-    padding: 40px 20px 30px;
-  }
-
-  .diagram {
-    position: relative;
-    width: min(86vw, 680px);
-    aspect-ratio: 1 / 1;
-    margin: 0 auto;
-  }
-
-  .orbit-line {
-    position: absolute;
-    inset: 11%;
-    border: 1.5px solid var(--line);
-    border-radius: 50%;
-    opacity: 0.5;
-    pointer-events: none;
-  }
-
-  .centre {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    width: 34%;
-    aspect-ratio: 1 / 1;
-    transform: translate(-50%, -50%);
-    border: 1.5px solid var(--line);
-    border-radius: 50%;
-    background: var(--circle);
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 18px;
-    cursor: default;
-    z-index: 4;
-  }
-
-  .centre-title {
-    font-size: clamp(18px, 3vw, 28px);
-    line-height: 1.05;
-    letter-spacing: -0.03em;
-  }
-
-  .centre-sub {
-    display: block;
-    margin-top: 6px;
-    font-size: clamp(11px, 1.5vw, 14px);
-    letter-spacing: 0;
-    color: var(--muted);
-  }
-
-  .node {
-    position: absolute;
-    width: 28%;
-    aspect-ratio: 1 / 1;
-    border: 1.5px solid var(--line);
-    border-radius: 50%;
-    background: var(--circle);
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 14px;
-    cursor: pointer;
-    z-index: 5;
-    transition: transform 180ms ease, background 180ms ease;
-  }
-
-  .node:hover,
-  .node:focus-visible,
-  .node.active {
-    background: var(--active);
-    transform: scale(1.035);
-    outline: none;
-  }
-
-  .node-title {
-    font-size: clamp(15px, 2.2vw, 23px);
-    letter-spacing: -0.02em;
-  }
-
-  .artist {
-    left: 50%;
-    top: 2%;
-    transform: translateX(-50%);
-  }
-
-  .materials {
-    left: 5%;
-    bottom: 13%;
-  }
-
-  .audiences {
-    right: 5%;
-    bottom: 13%;
-  }
-
-  .artist:hover,
-  .artist:focus-visible,
-  .artist.active {
-    transform: translateX(-50%) scale(1.035);
-  }
-
-  .branch-group {
-    position: absolute;
-    inset: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 200ms ease;
-    z-index: 3;
-  }
-
-  .branch-group.visible {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .branch {
-    position: absolute;
-    width: 16%;
-    min-width: 76px;
-    aspect-ratio: 1 / 1;
-    border: 1px solid var(--line);
-    border-radius: 50%;
-    background: rgba(255,255,255,0.88);
-    display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 9px;
-    font-size: clamp(10px, 1.5vw, 13px);
-    line-height: 1.05;
-  }
-
-  .branch::before {
-    content: "";
-    position: absolute;
-    width: 55px;
-    height: 1px;
-    background: var(--line);
-    opacity: 0.45;
-    z-index: -1;
-  }
-
-  /* Artist branches */
-  .artist-questions { left: 31%; top: 7%; }
-  .artist-contexts { right: 31%; top: 7%; }
-  .artist-intentions { left: 20%; top: 24%; }
-  .artist-desires { right: 20%; top: 24%; }
-
-  /* Materials branches */
-  .materials-affordances { left: 1%; bottom: 43%; }
-  .materials-limits { left: 14%; bottom: 34%; }
-  .materials-histories { left: 6%; bottom: 3%; }
-  .materials-processes { left: 25%; bottom: 4%; }
-
-  /* Audiences branches */
-  .audiences-readings { right: 1%; bottom: 43%; }
-  .audiences-questions { right: 14%; bottom: 34%; }
-  .audiences-histories { right: 6%; bottom: 3%; }
-  .audiences-differences { right: 25%; bottom: 4%; }
-
-  .hover-panel {
-    max-width: 720px;
-    min-height: 118px;
-    margin: 28px auto 0;
-    border-top: 1.5px solid var(--line);
-    padding-top: 18px;
-    text-align: center;
-  }
-
-  .hover-title {
-    font-size: clamp(18px, 2.4vw, 26px);
-    letter-spacing: -0.03em;
-    margin-bottom: 8px;
-  }
-
-  .hover-text {
-    font-size: clamp(14px, 1.8vw, 17px);
-    line-height: 1.45;
-    color: var(--ink);
-    max-width: 620px;
-    margin: 0 auto;
-  }
-
-  .instruction {
-    margin-top: 14px;
-    font-size: 12px;
-    color: var(--muted);
-  }
-
-  @media (max-width: 620px) {
-    .encounter-wrapper {
-      padding: 24px 10px 20px;
+  <style>
+    :root {
+      --ink: #111;
+      --muted: #666;
+      --bg: transparent;
     }
 
-    .diagram {
-      width: 96vw;
+    * {
+      box-sizing: border-box;
     }
 
-    .node {
-      width: 30%;
-      padding: 10px;
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
     }
 
-    .centre {
-      width: 36%;
-      padding: 12px;
+    .encounter-wrap {
+      width: 100%;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 24px 16px 32px;
     }
 
-    .branch {
-      width: 17%;
-      min-width: 58px;
-      font-size: 9.5px;
-      padding: 6px;
+    #diagram-holder {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      touch-action: none;
     }
 
     .hover-panel {
-      margin-top: 18px;
-      min-height: 150px;
-      padding-left: 12px;
-      padding-right: 12px;
+      max-width: 720px;
+      min-height: 120px;
+      margin: 22px auto 0;
+      border-top: 1.5px solid #111;
+      padding-top: 18px;
+      text-align: center;
     }
-  }
-</style>
+
+    .hover-title {
+      font-size: clamp(18px, 2.4vw, 26px);
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .hover-text {
+      font-size: clamp(14px, 1.8vw, 17px);
+      line-height: 1.45;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .instruction {
+      margin-top: 14px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+  </style>
 </head>
 
 <body>
+  <div class="encounter-wrap">
+    <div id="diagram-holder"></div>
 
-<div class="encounter-wrapper">
-
-  <div class="diagram" aria-label="Encounter diagram">
-
-    <div class="orbit-line"></div>
-
-    <div
-      class="centre"
-      data-title="Artwork / Site"
-      data-text="The artwork is the thing that can be encountered. It gathers the artist, materials and audiences into a shared situation."
-    >
-      <div>
-        <div class="centre-title">Artwork</div>
-        <span class="centre-sub">as site of encounter</span>
+    <div class="hover-panel" aria-live="polite">
+      <div class="hover-title" id="hoverTitle">Artwork / Site</div>
+      <p class="hover-text" id="hoverText">
+        The artwork is the field of encounter. It gathers artists, materials and audiences into a shared situation.
+      </p>
+      <div class="instruction">
+        Hover, tap, click and drag the bubbles. Select Artist, Materials or Audiences to reveal connected terms.
       </div>
     </div>
-
-    <button
-      class="node artist active"
-      data-group="artist"
-      data-title="Artist"
-      data-text="The artist brings questions, intentions, contexts, histories, methods, desires and decisions. These shape the work, but they do not fully control how it will be read."
-    >
-      <span class="node-title">Artist</span>
-    </button>
-
-    <button
-      class="node materials"
-      data-group="materials"
-      data-title="Materials"
-      data-text="Materials bring their own properties, limits, affordances, histories and resistances. They are not passive ingredients; they affect what the work can become."
-    >
-      <span class="node-title">Materials</span>
-    </button>
-
-    <button
-      class="node audiences"
-      data-group="audiences"
-      data-title="Audiences"
-      data-text="Audiences bring attention, memory, questions, histories, feelings and possible readings. Encounter allows the work to become active beyond the maker."
-    >
-      <span class="node-title">Audiences</span>
-    </button>
-
-    <div class="branch-group visible" data-group-content="artist">
-      <div class="branch artist-questions">questions</div>
-      <div class="branch artist-contexts">contexts</div>
-      <div class="branch artist-intentions">intentions</div>
-      <div class="branch artist-desires">desires</div>
-    </div>
-
-    <div class="branch-group" data-group-content="materials">
-      <div class="branch materials-affordances">affordances</div>
-      <div class="branch materials-limits">limits</div>
-      <div class="branch materials-histories">histories</div>
-      <div class="branch materials-processes">processes</div>
-    </div>
-
-    <div class="branch-group" data-group-content="audiences">
-      <div class="branch audiences-readings">readings</div>
-      <div class="branch audiences-questions">questions</div>
-      <div class="branch audiences-histories">histories</div>
-      <div class="branch audiences-differences">differences</div>
-    </div>
-
   </div>
 
-  <div class="hover-panel" aria-live="polite">
-    <div class="hover-title" id="hoverTitle">Artist</div>
-    <p class="hover-text" id="hoverText">
-      The artist brings questions, intentions, contexts, histories, methods, desires and decisions. These shape the work, but they do not fully control how it will be read.
-    </p>
-    <div class="instruction">Hover or tap a circle to explore the conditions of encounter.</div>
-  </div>
+  <script>
+    let nodes = [];
+    let activeGroup = null;
+    let draggedNode = null;
+    let hoveredNode = null;
 
-</div>
+    let cx, cy, fieldR;
+    let canvasSize;
 
-<script>
-  const nodes = document.querySelectorAll(".node");
-  const centre = document.querySelector(".centre");
-  const hoverTitle = document.getElementById("hoverTitle");
-  const hoverText = document.getElementById("hoverText");
-  const branchGroups = document.querySelectorAll(".branch-group");
+    const hoverTitle = document.getElementById("hoverTitle");
+    const hoverText = document.getElementById("hoverText");
 
-  function updateText(el) {
-    hoverTitle.textContent = el.dataset.title;
-    hoverText.textContent = el.dataset.text;
-  }
+    const mainData = [
+      {
+        id: "artist",
+        label: "Artist",
+        type: "main",
+        text: "The artist brings questions, intentions, contexts, histories, methods, desires and decisions. These shape the work, but they do not fully control how it will be read.",
+        terms: [
+          ["questions", "What questions does the maker bring to the work?"],
+          ["contexts", "What cultural, personal or artistic contexts shape the work?"],
+          ["intentions", "What does the artist hope the work might do?"],
+          ["histories", "What histories does the artist carry into the making?"],
+          ["desires", "What wants, uncertainties or attachments motivate the work?"]
+        ]
+      },
+      {
+        id: "materials",
+        label: "Materials",
+        type: "main",
+        text: "Materials bring their own properties, limits, affordances, histories and resistances. They are not passive ingredients; they affect what the work can become.",
+        terms: [
+          ["affordances", "What does the material make possible?"],
+          ["limits", "What does the material resist, prevent or complicate?"],
+          ["histories", "What histories, traditions or associations come with the material?"],
+          ["processes", "What actions, techniques or transformations does the material require?"],
+          ["failure", "How might accident, friction or failure become part of the work?"]
+        ]
+      },
+      {
+        id: "audiences",
+        label: "Audiences",
+        type: "main",
+        text: "Audiences bring attention, memory, questions, histories, feelings and possible readings. Encounter allows the work to become active beyond the maker.",
+        terms: [
+          ["readings", "What might others see, feel, notice or interpret?"],
+          ["questions", "What questions might the work open for someone else?"],
+          ["histories", "What histories or experiences might audiences bring with them?"],
+          ["differences", "How might different people encounter the work differently?"],
+          ["responses", "What kinds of attention, feeling or response might the work invite?"]
+        ]
+      }
+    ];
 
-  function showGroup(groupName) {
-    branchGroups.forEach(group => {
-      group.classList.toggle(
-        "visible",
-        group.dataset.groupContent === groupName
-      );
-    });
+    const siteText = {
+      title: "Artwork / Site",
+      text: "The artwork is the field of encounter. It gathers artists, materials and audiences into a shared situation."
+    };
 
-    nodes.forEach(node => {
-      node.classList.toggle(
-        "active",
-        node.dataset.group === groupName
-      );
-    });
-  }
+    function setup() {
+      const holder = document.getElementById("diagram-holder");
+      canvasSize = Math.min(holder.offsetWidth, 760);
+      const cnv = createCanvas(canvasSize, canvasSize);
+      cnv.parent("diagram-holder");
 
-  nodes.forEach(node => {
-    node.addEventListener("mouseenter", () => updateText(node));
-    node.addEventListener("focus", () => updateText(node));
+      textFont("Arial");
+      initNodes();
+    }
 
-    node.addEventListener("click", () => {
-      updateText(node);
-      showGroup(node.dataset.group);
-    });
-  });
+    function windowResized() {
+      const holder = document.getElementById("diagram-holder");
+      canvasSize = Math.min(holder.offsetWidth, 760);
+      resizeCanvas(canvasSize, canvasSize);
+      constrainAllNodes();
+    }
 
-  centre.addEventListener("mouseenter", () => updateText(centre));
-</script>
+    function initNodes() {
+      nodes = [];
+      cx = width / 2;
+      cy = height / 2;
+      fieldR = width * 0.43;
 
+      const positions = [
+        { x: cx, y: cy - fieldR * 0.42 },
+        { x: cx - fieldR * 0.42, y: cy + fieldR * 0.25 },
+        { x: cx + fieldR * 0.42, y: cy + fieldR * 0.25 }
+      ];
+
+      mainData.forEach((d, i) => {
+        nodes.push(new Bubble({
+          id: d.id,
+          label: d.label,
+          type: "main",
+          group: d.id,
+          x: positions[i].x,
+          y: positions[i].y,
+          r: width * 0.105,
+          text: d.text,
+          visible: true
+        }));
+      });
+
+      mainData.forEach((group, groupIndex) => {
+        const angleStart = [-HALF_PI, PI * 0.82, PI * 0.18][groupIndex];
+
+        group.terms.forEach((term, i) => {
+          const angle = angleStart + map(i, 0, group.terms.length - 1, -0.68, 0.68);
+          const parent = nodes.find(n => n.id === group.id);
+          const dist = fieldR * 0.42;
+
+          nodes.push(new Bubble({
+            id: `${group.id}-${term[0]}`,
+            label: term[0],
+            type: "term",
+            group: group.id,
+            x: parent.x + cos(angle) * dist,
+            y: parent.y + sin(angle) * dist,
+            r: width * 0.066,
+            text: term[1],
+            visible: false
+          }));
+        });
+      });
+    }
+
+    function draw() {
+      clear();
+
+      cx = width / 2;
+      cy = height / 2;
+      fieldR = width * 0.43;
+
+      updateHover();
+
+      drawArtworkField();
+
+      if (activeGroup) {
+        drawConnections();
+      }
+
+      applyPhysics();
+
+      nodes.forEach(node => {
+        if (node.visible) node.display();
+      });
+    }
+
+    function drawArtworkField() {
+      push();
+      noFill();
+      stroke(17, 17, 17, 150);
+      strokeWeight(1.6);
+      ellipse(cx, cy, fieldR * 2, fieldR * 2);
+
+      noStroke();
+      fill(17, 17, 17, 165);
+      textAlign(CENTER, CENTER);
+      textSize(width * 0.028);
+      textStyle(NORMAL);
+      text("Artwork / Site", cx, cy);
+      textSize(width * 0.017);
+      fill(17, 17, 17, 105);
+      text("the field of encounter", cx, cy + width * 0.035);
+      pop();
+    }
+
+    function drawConnections() {
+      const parent = nodes.find(n => n.id === activeGroup);
+      if (!parent) return;
+
+      push();
+      stroke(17, 17, 17, 120);
+      strokeWeight(1.2);
+
+      nodes.forEach(node => {
+        if (node.group === activeGroup && node.type === "term" && node.visible) {
+          line(parent.x, parent.y, node.x, node.y);
+        }
+      });
+
+      pop();
+    }
+
+    function applyPhysics() {
+      const visibleNodes = nodes.filter(n => n.visible);
+
+      visibleNodes.forEach(node => {
+        if (node !== draggedNode) {
+          node.vx += random(-0.012, 0.012);
+          node.vy += random(-0.012, 0.012);
+        }
+      });
+
+      for (let i = 0; i < visibleNodes.length; i++) {
+        for (let j = i + 1; j < visibleNodes.length; j++) {
+          repel(visibleNodes[i], visibleNodes[j]);
+        }
+      }
+
+      if (activeGroup) {
+        const parent = nodes.find(n => n.id === activeGroup);
+
+        nodes.forEach(node => {
+          if (node.group === activeGroup && node.type === "term" && node.visible) {
+            spring(node, parent, fieldR * 0.34, 0.0025);
+          }
+        });
+      }
+
+      visibleNodes.forEach(node => {
+        if (node !== draggedNode) {
+          node.x += node.vx;
+          node.y += node.vy;
+        }
+
+        node.vx *= 0.92;
+        node.vy *= 0.92;
+
+        keepInsideField(node);
+      });
+    }
+
+    function repel(a, b) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const d = max(0.001, sqrt(dx * dx + dy * dy));
+      const minDist = a.r + b.r + width * 0.018;
+
+      if (d < minDist) {
+        const force = (minDist - d) * 0.006;
+        const fx = (dx / d) * force;
+        const fy = (dy / d) * force;
+
+        if (a !== draggedNode) {
+          a.vx -= fx;
+          a.vy -= fy;
+        }
+
+        if (b !== draggedNode) {
+          b.vx += fx;
+          b.vy += fy;
+        }
+      }
+    }
+
+    function spring(a, b, target, strength) {
+      const dx = b.x - a.x;
+      const dy = b.y - a.y;
+      const d = max(0.001, sqrt(dx * dx + dy * dy));
+      const stretch = d - target;
+
+      const fx = (dx / d) * stretch * strength;
+      const fy = (dy / d) * stretch * strength;
+
+      if (a !== draggedNode) {
+        a.vx += fx;
+        a.vy += fy;
+      }
+
+      if (b !== draggedNode) {
+        b.vx -= fx * 0.25;
+        b.vy -= fy * 0.25;
+      }
+    }
+
+    function keepInsideField(node) {
+      const dx = node.x - cx;
+      const dy = node.y - cy;
+      const d = sqrt(dx * dx + dy * dy);
+      const maxD = fieldR - node.r - 3;
+
+      if (d > maxD) {
+        const angle = atan2(dy, dx);
+        node.x = cx + cos(angle) * maxD;
+        node.y = cy + sin(angle) * maxD;
+
+        node.vx *= -0.22;
+        node.vy *= -0.22;
+      }
+    }
+
+    function constrainAllNodes() {
+      nodes.forEach(n => {
+        n.r = n.type === "main" ? width * 0.105 : width * 0.066;
+        keepInsideField(n);
+      });
+    }
+
+    function updateHover() {
+      hoveredNode = null;
+
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const node = nodes[i];
+        if (node.visible && dist(mouseX, mouseY, node.x, node.y) < node.r) {
+          hoveredNode = node;
+          break;
+        }
+      }
+
+      if (hoveredNode && !draggedNode) {
+        setHoverText(hoveredNode.label, hoveredNode.text);
+      }
+    }
+
+    function setHoverText(title, textContent) {
+      hoverTitle.textContent = title;
+      hoverText.textContent = textContent;
+    }
+
+    function mousePressed() {
+      selectNode(mouseX, mouseY);
+      return false;
+    }
+
+    function touchStarted() {
+      selectNode(mouseX, mouseY);
+      return false;
+    }
+
+    function selectNode(x, y) {
+      for (let i = nodes.length - 1; i >= 0; i--) {
+        const node = nodes[i];
+
+        if (node.visible && dist(x, y, node.x, node.y) < node.r) {
+          draggedNode = node;
+          node.dragOffsetX = node.x - x;
+          node.dragOffsetY = node.y - y;
+
+          setHoverText(node.label, node.text);
+
+          if (node.type === "main") {
+            activateGroup(node.group);
+          }
+
+          return;
+        }
+      }
+
+      setHoverText(siteText.title, siteText.text);
+    }
+
+    function mouseDragged() {
+      dragSelected(mouseX, mouseY);
+      return false;
+    }
+
+    function touchMoved() {
+      dragSelected(mouseX, mouseY);
+      return false;
+    }
+
+    function dragSelected(x, y) {
+      if (draggedNode) {
+        draggedNode.x = x + draggedNode.dragOffsetX;
+        draggedNode.y = y + draggedNode.dragOffsetY;
+        draggedNode.vx *= 0.4;
+        draggedNode.vy *= 0.4;
+        keepInsideField(draggedNode);
+      }
+    }
+
+    function mouseReleased() {
+      draggedNode = null;
+      return false;
+    }
+
+    function touchEnded() {
+      draggedNode = null;
+      return false;
+    }
+
+    function activateGroup(groupName) {
+      activeGroup = groupName;
+
+      nodes.forEach(node => {
+        if (node.type === "term") {
+          node.visible = node.group === groupName;
+        }
+      });
+
+      const parent = nodes.find(n => n.id === groupName);
+      const terms = nodes.filter(n => n.type === "term" && n.group === groupName);
+
+      terms.forEach((node, i) => {
+        const angle = TWO_PI * (i / terms.length) - HALF_PI;
+        const targetX = parent.x + cos(angle) * fieldR * 0.34;
+        const targetY = parent.y + sin(angle) * fieldR * 0.34;
+
+        node.x = lerp(node.x, targetX, 0.45);
+        node.y = lerp(node.y, targetY, 0.45);
+        keepInsideField(node);
+      });
+    }
+
+    class Bubble {
+      constructor({ id, label, type, group, x, y, r, text, visible }) {
+        this.id = id;
+        this.label = label;
+        this.type = type;
+        this.group = group;
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.text = text;
+        this.visible = visible;
+        this.vx = random(-0.35, 0.35);
+        this.vy = random(-0.35, 0.35);
+        this.dragOffsetX = 0;
+        this.dragOffsetY = 0;
+      }
+
+      display() {
+        const isHover = hoveredNode === this;
+        const isActive = this.type === "main" && activeGroup === this.group;
+
+        push();
+
+        stroke(17, 17, 17, isActive || isHover ? 230 : 170);
+        strokeWeight(isActive ? 1.8 : 1.25);
+
+        if (isHover || isActive) {
+          fill(245, 245, 245, 235);
+        } else {
+          fill(255, 255, 255, 225);
+        }
+
+        ellipse(this.x, this.y, this.r * 2, this.r * 2);
+
+        noStroke();
+        fill(17, 17, 17, 235);
+        textAlign(CENTER, CENTER);
+        textStyle(NORMAL);
+
+        if (this.type === "main") {
+          textSize(width * 0.026);
+        } else {
+          textSize(width * 0.017);
+        }
+
+        wrapText(this.label, this.x, this.y, this.r * 1.45, this.type === "main" ? width * 0.032 : width * 0.022);
+
+        pop();
+      }
+    }
+
+    function wrapText(str, x, y, maxWidth, lineHeight) {
+      const words = str.split(" ");
+      let lines = [];
+      let line = "";
+
+      for (let i = 0; i < words.length; i++) {
+        const testLine = line + words[i] + " ";
+        if (textWidth(testLine) > maxWidth && i > 0) {
+          lines.push(line.trim());
+          line = words[i] + " ";
+        } else {
+          line = testLine;
+        }
+      }
+
+      lines.push(line.trim());
+
+      const startY = y - ((lines.length - 1) * lineHeight) / 2;
+
+      lines.forEach((l, index) => {
+        text(l, x, startY + index * lineHeight);
+      });
+    }
+  </script>
 </body>
 </html>
