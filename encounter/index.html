@@ -495,66 +495,67 @@ function windowResized() {
     }
 
     class Bubble {
-      constructor({ id, label, type, group, x, y, r, text, visible }) {
-        this.id = id;
-        this.label = label;
-        this.type = type;
-        this.group = group;
-        this.x = x;
-        this.y = y;
-        this.r = r;
-        this.text = text;
-        this.visible = visible;
-        this.vx = random(-0.35, 0.35);
-        this.vy = random(-0.35, 0.35);
-        this.dragOffsetX = 0;
-        this.dragOffsetY = 0;
-      }
-
-      display() {
-  const isHover = hoveredNode === this;
-  const isActive = this.type === "main" && activeGroup === this.group;
-  const isInverted = isHover || isActive;
-
-  push();
-
-  stroke(17, 17, 17, isInverted ? 230 : 170);
-  strokeWeight(isActive ? 1.8 : 1.25);
-
-  if (isInverted) {
-    fill(17, 17, 17, 245);
-  } else {
-    fill(255, 255, 255, 225);
+  constructor({ id, label, type, group, x, y, r, text, visible }) {
+    this.id = id;
+    this.label = label;
+    this.type = type;
+    this.group = group;
+    this.x = x;
+    this.y = y;
+    this.r = r;
+    this.text = text;
+    this.visible = visible;
+    this.vx = random(-0.35, 0.35);
+    this.vy = random(-0.35, 0.35);
+    this.dragOffsetX = 0;
+    this.dragOffsetY = 0;
   }
 
-  ellipse(this.x, this.y, this.r * 2, this.r * 2);
+  display() {
+    const isHover = hoveredNode === this;
+    const isActive = this.type === "main" && activeGroup === this.group;
+    const isInverted = isHover || isActive;
 
-  noStroke();
+    push();
 
-  if (isInverted) {
-    fill(255, 255, 255, 245);
-  } else {
-    fill(17, 17, 17, 235);
+    stroke(17, 17, 17, isInverted ? 230 : 170);
+    strokeWeight(isActive ? 1.8 : 1.25);
+
+    if (isInverted) {
+      fill(17, 17, 17, 245);
+    } else {
+      fill(255, 255, 255, 225);
+    }
+
+    ellipse(this.x, this.y, this.r * 2, this.r * 2);
+
+    noStroke();
+
+    if (isInverted) {
+      fill(255, 255, 255, 245);
+    } else {
+      fill(17, 17, 17, 235);
+    }
+
+    textAlign(CENTER, CENTER);
+    textStyle(NORMAL);
+
+    if (this.type === "main") {
+      textSize(width * 0.026);
+    } else {
+      textSize(width * 0.017);
+    }
+
+    wrapText(
+      this.label,
+      this.x,
+      this.y,
+      this.r * 1.45,
+      this.type === "main" ? width * 0.032 : width * 0.022
+    );
+
+    pop();
   }
-
-  textAlign(CENTER, CENTER);
-  textStyle(NORMAL);
-
-  if (this.type === "main") {
-    textSize(width * 0.026);
-  } else {
-    textSize(width * 0.017);
-  }
-
-  wrapText(
-    this.label,
-    this.x,
-    this.y,
-    this.r * 1.45,
-    this.type === "main" ? width * 0.032 : width * 0.022
-  );
-
-  pop();
 }
 
     function wrapText(str, x, y, maxWidth, lineHeight) {
