@@ -512,38 +512,50 @@ function windowResized() {
       }
 
       display() {
-        const isHover = hoveredNode === this;
-        const isActive = this.type === "main" && activeGroup === this.group;
+  const isHover = hoveredNode === this;
+  const isActive = this.type === "main" && activeGroup === this.group;
+  const isInverted = isHover || isActive;
 
-        push();
+  push();
 
-        stroke(17, 17, 17, isActive || isHover ? 230 : 170);
-        strokeWeight(isActive ? 1.8 : 1.25);
+  stroke(17, 17, 17, isInverted ? 230 : 170);
+  strokeWeight(isActive ? 1.8 : 1.25);
 
-        if (isHover || isActive) {
-          fill(245, 245, 245, 235);
-        } else {
-          fill(255, 255, 255, 225);
-        }
+  if (isInverted) {
+    fill(17, 17, 17, 245);
+  } else {
+    fill(255, 255, 255, 225);
+  }
 
-        ellipse(this.x, this.y, this.r * 2, this.r * 2);
+  ellipse(this.x, this.y, this.r * 2, this.r * 2);
 
-        noStroke();
-        fill(17, 17, 17, 235);
-        textAlign(CENTER, CENTER);
-        textStyle(NORMAL);
+  noStroke();
 
-        if (this.type === "main") {
-          textSize(width * 0.026);
-        } else {
-          textSize(width * 0.017);
-        }
+  if (isInverted) {
+    fill(255, 255, 255, 245);
+  } else {
+    fill(17, 17, 17, 235);
+  }
 
-        wrapText(this.label, this.x, this.y, this.r * 1.45, this.type === "main" ? width * 0.032 : width * 0.022);
+  textAlign(CENTER, CENTER);
+  textStyle(NORMAL);
 
-        pop();
-      }
-    }
+  if (this.type === "main") {
+    textSize(width * 0.026);
+  } else {
+    textSize(width * 0.017);
+  }
+
+  wrapText(
+    this.label,
+    this.x,
+    this.y,
+    this.r * 1.45,
+    this.type === "main" ? width * 0.032 : width * 0.022
+  );
+
+  pop();
+}
 
     function wrapText(str, x, y, maxWidth, lineHeight) {
       const words = str.split(" ");
