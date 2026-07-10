@@ -1,9 +1,11 @@
 {
   "name": "studiopractices",
-  "account_id": "37f5515a646f8ae9b86144cbab2e46d3",
+  "account_id": "YOUR_REAL_ACCOUNT_ID",
+  "main": "./src/index.js",
   "compatibility_date": "2026-06-17",
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS"
   },
   "d1_databases": [
     {
