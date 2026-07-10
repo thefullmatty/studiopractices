@@ -1,27 +1,28 @@
 set_slug,subset_slug,name,slug,description,aliases,related_slugs
-theme,body-and-identity,body,body,,,
-theme,body-and-identity,self-image,self-image,,,
-theme,body-and-identity,gender,gender,,,
-theme,body-and-identity,gender politics,gender-politics,,,
-theme,body-and-identity,feminism,feminism,,,
-theme,body-and-identity,queer identity,queer-identity,,,
-theme,body-and-identity,trans identity,trans-identity,,,
-theme,body-and-identity,sexuality,sexuality,,,
-theme,body-and-identity,masculinity,masculinity,,,
-theme,body-and-identity,disability,disability,,,
-theme,body-and-identity,neurodiversity,neurodiversity,,,
-theme,body-and-identity,fat politics,fat-politics,,,
-theme,body-and-identity,bodily autonomy,bodily-autonomy,,,
-theme,body-and-identity,portraiture,portraiture,,,
-theme,body-and-identity,masking,masking,,,
-theme,body-and-identity,embodiment,embodiment,,,
-theme,body-and-identity,vulnerability,vulnerability,,,
-theme,body-and-identity,transformation,transformation,,,
-theme,body-and-identity,intimacy,intimacy,,,
-theme,body-and-identity,persona,persona,,,
-theme,body-and-identity,visibility,visibility,,,
-theme,body-and-identity,alter ego,alter-ego,,,
-theme,body-and-identity,representation,representation,,,
+theme,body-and-identity,body,body,"The lived, represented, sensed, or performed body as a site of experience, identity, vulnerability, power, and relation.","embodiment|corporeality|physicality|the body","embodiment|vulnerability|portraiture|bodily-autonomy"
+theme,body-and-identity,self-image,self-image,"How a person sees, imagines, performs, or represents themselves through visual, material, social, or cultural forms.","self-perception|self-representation|image of self|identity image","portraiture|persona|visibility|representation"
+theme,body-and-identity,gender,gender,"The social, cultural, embodied, and personal meanings through which gender is experienced, represented, questioned, or performed.","gender identity|gender expression|gendered experience","gender-politics|queer-identity|trans-identity|motherhood|femininity|gender roles|masculinity"
+theme,body-and-identity,gender politics,gender-politics,"The ways gender is shaped by power, social expectations, law, culture, labour, representation, and resistance.","gender and power|gender inequality|gender critique","gender|feminism|bodily-autonomy|visibility"
+theme,body-and-identity,feminism,feminism,"Creative, critical, and political approaches concerned with gendered power, lived experience, care, embodiment, labour, and representation.","feminist art|feminist theory|women's experience|gender justice","gender-politics|care|labour|representation"
+theme,body-and-identity,queer identity,queer-identity,"Forms of identity, relation, desire, expression, and belonging that question or exceed normative expectations of gender and sexuality.","queerness|LGBTQIA+|queer experience|queer culture","sexuality|gender|visibility|intimacy"
+theme,body-and-identity,trans identity,trans-identity,"Experiences, representations, and expressions of gender transition, trans embodiment, self-determination, recognition, and lived identity.","transness|trans experience|gender transition|gender affirmation","gender|bodily-autonomy|visibility|transformation"
+theme,body-and-identity,sexuality,sexuality,"The ways desire, intimacy, pleasure, orientation, relation, and the erotic are experienced, represented, regulated, or imagined.","desire|sexual identity|erotics|orientation","queer-identity|intimacy|bodily-autonomy|visibility"
+theme,body-and-identity,masculinity,masculinity,"The social, cultural, emotional, and embodied forms through which masculinity is performed, inherited, questioned, or reimagined.","manhood|male identity|masculine performance|masculine culture","gender|gender-politics|persona|vulnerability"
+theme,body-and-identity,disability,disability,"Embodied, social, political, and material experiences of access, difference, dependency, care, perception, and ableism.","access|disabled experience|ableism|crip theory","neurodiversity|care|bodily-autonomy|vulnerability"
+theme,body-and-identity,neurodiversity,neurodiversity,"Differences in perception, cognition, attention, communication, sensory experience, and ways of being in the world.","neurodivergence|autism|ADHD|sensory experience","disability|perception|care|masking"
+theme,body-and-identity,pain,pain,"A lived or represented intensity of the body, where hurt, endurance, sensation, memory, care, and vulnerability become material or expressive concerns.","hurt|suffering|ache|wound|discomfort|chronic pain|sensory intensity","body|embodiment|vulnerability|disability|care|memory|intimacy"
+theme,body-and-identity,fat politics,fat-politics,"Critical and creative approaches to body size, fatness, stigma, desire, visibility, health discourse, and bodily normativity.","body size|fat liberation|body politics|anti-fat bias","body|visibility|representation|bodily-autonomy"
+theme,body-and-identity,bodily autonomy,bodily-autonomy,"The right and capacity to make decisions about one's body, movement, health, appearance, sexuality, and self-representation.","self-determination|body rights|consent|agency","body|sexuality|gender-politics|trans-identity"
+theme,body-and-identity,portraiture,portraiture,"The representation of a person, self, face, body, presence, or identity through visual, material, photographic, or performative means.","portrait|self-portrait|likeness|figure","self-image|representation|visibility|persona"
+theme,body-and-identity,masking,masking,"The concealment, adaptation, performance, or modulation of identity, emotion, behaviour, or difference in response to social expectations.","camouflage|passing|concealment|social performance","persona|visibility|neurodiversity|self-image"
+theme,body-and-identity,embodiment,embodiment,"The experience of being in, through, and as a body, including sensation, gesture, vulnerability, movement, memory, and perception.","lived body|body experience|corporeality|somatic experience","body|gesture|vulnerability|movement"
+theme,body-and-identity,vulnerability,vulnerability,"A condition of exposure, openness, risk, tenderness, dependence, or susceptibility within bodies, relationships, materials, or systems.","exposure|fragility|openness|risk","body|intimacy|care|disability"
+theme,body-and-identity,transformation,transformation,"A process of becoming, changing, shifting, disguising, mutating, transitioning, or reconfiguring identity, body, material, or form.","change|becoming|metamorphosis|transition","trans-identity|alter-ego|persona|layer-and-transform"
+theme,body-and-identity,intimacy,intimacy,"Forms of closeness, touch, trust, desire, care, privacy, kinship, or emotional proximity between bodies, people, objects, or spaces.","closeness|care|touch|private relation","sexuality|vulnerability|care|relation"
+theme,body-and-identity,persona,persona,"A constructed, performed, exaggerated, fictional, public, or strategic version of self or identity.","performed self|public self|character|identity performance","masking|alter-ego|self-image|portraiture"
+theme,body-and-identity,visibility,visibility,"The condition of being seen, recognised, exposed, represented, overlooked, surveilled, or made public.","recognition|being seen|exposure|public presence","representation|queer-identity|masking|portraiture"
+theme,body-and-identity,alter ego,alter-ego,"An alternate self, character, double, mask, persona, or fictional identity through which another version of the self can appear.","double|avatar|other self|character","persona|transformation|masking|self-image"
+theme,body-and-identity,representation,representation,"The ways bodies, identities, people, groups, or experiences are depicted, framed, mediated, interpreted, or made visible.","depiction|image|portrayal|visual representation","portraiture|visibility|self-image|gender-politics"
 theme,memory-and-archive,memory,memory,,,
 theme,memory-and-archive,archive,archive,,,
 theme,memory-and-archive,trace,trace,,,

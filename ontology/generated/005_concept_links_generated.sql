@@ -72,70 +72,76 @@ INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order
 SELECT c.id, s.id, 12, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'fat-politics';
+WHERE c.slug = 'pain';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 13, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'bodily-autonomy';
+WHERE c.slug = 'fat-politics';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 14, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'portraiture';
+WHERE c.slug = 'bodily-autonomy';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 15, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'masking';
+WHERE c.slug = 'portraiture';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 16, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'embodiment';
+WHERE c.slug = 'masking';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 17, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'vulnerability';
+WHERE c.slug = 'embodiment';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 18, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'transformation';
+WHERE c.slug = 'vulnerability';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 19, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'intimacy';
+WHERE c.slug = 'transformation';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 20, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'persona';
+WHERE c.slug = 'intimacy';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 21, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'visibility';
+WHERE c.slug = 'persona';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 22, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
-WHERE c.slug = 'alter-ego';
+WHERE c.slug = 'visibility';
 
 INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
 SELECT c.id, s.id, 23, 1
+FROM concepts c
+JOIN concept_subsets s ON s.slug = 'body-and-identity'
+WHERE c.slug = 'alter-ego';
+
+INSERT OR IGNORE INTO concept_subset_links (concept_id, subset_id, display_order, is_primary)
+SELECT c.id, s.id, 24, 1
 FROM concepts c
 JOIN concept_subsets s ON s.slug = 'body-and-identity'
 WHERE c.slug = 'representation';

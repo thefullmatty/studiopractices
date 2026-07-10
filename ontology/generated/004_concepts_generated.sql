@@ -3,73 +3,76 @@ PRAGMA foreign_keys = ON;
 -- Generated from ./ontology/source/concepts.csv
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('body', 'body', NULL);
+VALUES ('body', 'body', 'The lived, represented, sensed, or performed body as a site of experience, identity, vulnerability, power, and relation.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('self-image', 'self-image', NULL);
+VALUES ('self-image', 'self-image', 'How a person sees, imagines, performs, or represents themselves through visual, material, social, or cultural forms.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('gender', 'gender', NULL);
+VALUES ('gender', 'gender', 'The social, cultural, embodied, and personal meanings through which gender is experienced, represented, questioned, or performed.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('gender politics', 'gender-politics', NULL);
+VALUES ('gender politics', 'gender-politics', 'The ways gender is shaped by power, social expectations, law, culture, labour, representation, and resistance.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('feminism', 'feminism', NULL);
+VALUES ('feminism', 'feminism', 'Creative, critical, and political approaches concerned with gendered power, lived experience, care, embodiment, labour, and representation.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('queer identity', 'queer-identity', NULL);
+VALUES ('queer identity', 'queer-identity', 'Forms of identity, relation, desire, expression, and belonging that question or exceed normative expectations of gender and sexuality.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('trans identity', 'trans-identity', NULL);
+VALUES ('trans identity', 'trans-identity', 'Experiences, representations, and expressions of gender transition, trans embodiment, self-determination, recognition, and lived identity.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('sexuality', 'sexuality', NULL);
+VALUES ('sexuality', 'sexuality', 'The ways desire, intimacy, pleasure, orientation, relation, and the erotic are experienced, represented, regulated, or imagined.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('masculinity', 'masculinity', NULL);
+VALUES ('masculinity', 'masculinity', 'The social, cultural, emotional, and embodied forms through which masculinity is performed, inherited, questioned, or reimagined.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('disability', 'disability', NULL);
+VALUES ('disability', 'disability', 'Embodied, social, political, and material experiences of access, difference, dependency, care, perception, and ableism.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('neurodiversity', 'neurodiversity', NULL);
+VALUES ('neurodiversity', 'neurodiversity', 'Differences in perception, cognition, attention, communication, sensory experience, and ways of being in the world.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('fat politics', 'fat-politics', NULL);
+VALUES ('pain', 'pain', 'A lived or represented intensity of the body, where hurt, endurance, sensation, memory, care, and vulnerability become material or expressive concerns.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('bodily autonomy', 'bodily-autonomy', NULL);
+VALUES ('fat politics', 'fat-politics', 'Critical and creative approaches to body size, fatness, stigma, desire, visibility, health discourse, and bodily normativity.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('portraiture', 'portraiture', NULL);
+VALUES ('bodily autonomy', 'bodily-autonomy', 'The right and capacity to make decisions about one''s body, movement, health, appearance, sexuality, and self-representation.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('masking', 'masking', NULL);
+VALUES ('portraiture', 'portraiture', 'The representation of a person, self, face, body, presence, or identity through visual, material, photographic, or performative means.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('embodiment', 'embodiment', NULL);
+VALUES ('masking', 'masking', 'The concealment, adaptation, performance, or modulation of identity, emotion, behaviour, or difference in response to social expectations.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('vulnerability', 'vulnerability', NULL);
+VALUES ('embodiment', 'embodiment', 'The experience of being in, through, and as a body, including sensation, gesture, vulnerability, movement, memory, and perception.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('transformation', 'transformation', NULL);
+VALUES ('vulnerability', 'vulnerability', 'A condition of exposure, openness, risk, tenderness, dependence, or susceptibility within bodies, relationships, materials, or systems.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('intimacy', 'intimacy', NULL);
+VALUES ('transformation', 'transformation', 'A process of becoming, changing, shifting, disguising, mutating, transitioning, or reconfiguring identity, body, material, or form.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('persona', 'persona', NULL);
+VALUES ('intimacy', 'intimacy', 'Forms of closeness, touch, trust, desire, care, privacy, kinship, or emotional proximity between bodies, people, objects, or spaces.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('visibility', 'visibility', NULL);
+VALUES ('persona', 'persona', 'A constructed, performed, exaggerated, fictional, public, or strategic version of self or identity.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('alter ego', 'alter-ego', NULL);
+VALUES ('visibility', 'visibility', 'The condition of being seen, recognised, exposed, represented, overlooked, surveilled, or made public.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
-VALUES ('representation', 'representation', NULL);
+VALUES ('alter ego', 'alter-ego', 'An alternate self, character, double, mask, persona, or fictional identity through which another version of the self can appear.');
+
+INSERT OR IGNORE INTO concepts (name, slug, description)
+VALUES ('representation', 'representation', 'The ways bodies, identities, people, groups, or experiences are depicted, framed, mediated, interpreted, or made visible.');
 
 INSERT OR IGNORE INTO concepts (name, slug, description)
 VALUES ('memory', 'memory', NULL);
