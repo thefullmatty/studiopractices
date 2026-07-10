@@ -1,5 +1,8 @@
 -- ============================================================
--- SEED SUBSETS
+-- STUDIO PRACTICES ONTOLOGY
+-- FILE: 003_subsets.sql
+--
+-- Defines the secondary elements connected to primary sets.
 -- ============================================================
 
 INSERT OR IGNORE INTO concept_subsets (set_id, name, slug, display_order)
