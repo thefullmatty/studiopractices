@@ -1,7 +1,14 @@
 -- ============================================================
--- SEED SETS
+-- STUDIO PRACTICES ONTOLOGY
+-- FILE: 002_sets.sql
+--
+-- Defines the primary conceptual dimensions of the platform.
+--
+-- Theme
+-- Material
+-- Process
+-- Technique
 -- ============================================================
-
 
 INSERT OR IGNORE INTO concept_sets (name, slug, display_order) VALUES ('Theme', 'theme', 1);
 
