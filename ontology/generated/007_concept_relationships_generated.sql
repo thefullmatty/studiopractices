@@ -71,24 +71,6 @@ WHERE source.slug = 'gender';
 INSERT OR IGNORE INTO concept_relationships (source_concept_id, target_concept_id, relationship_type, weight, note)
 SELECT source.id, target.id, 'related', 1.0, NULL
 FROM concepts source
-JOIN concepts target ON target.slug = 'motherhood'
-WHERE source.slug = 'gender';
-
-INSERT OR IGNORE INTO concept_relationships (source_concept_id, target_concept_id, relationship_type, weight, note)
-SELECT source.id, target.id, 'related', 1.0, NULL
-FROM concepts source
-JOIN concepts target ON target.slug = 'femininity'
-WHERE source.slug = 'gender';
-
-INSERT OR IGNORE INTO concept_relationships (source_concept_id, target_concept_id, relationship_type, weight, note)
-SELECT source.id, target.id, 'related', 1.0, NULL
-FROM concepts source
-JOIN concepts target ON target.slug = 'gender roles'
-WHERE source.slug = 'gender';
-
-INSERT OR IGNORE INTO concept_relationships (source_concept_id, target_concept_id, relationship_type, weight, note)
-SELECT source.id, target.id, 'related', 1.0, NULL
-FROM concepts source
 JOIN concepts target ON target.slug = 'masculinity'
 WHERE source.slug = 'gender';
 

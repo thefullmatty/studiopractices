@@ -58,6 +58,21 @@ FROM concepts c
 WHERE c.slug = 'gender';
 
 INSERT OR IGNORE INTO concept_aliases (concept_id, alias, slug)
+SELECT c.id, 'motherhood', 'motherhood'
+FROM concepts c
+WHERE c.slug = 'gender';
+
+INSERT OR IGNORE INTO concept_aliases (concept_id, alias, slug)
+SELECT c.id, 'femininity', 'femininity'
+FROM concepts c
+WHERE c.slug = 'gender';
+
+INSERT OR IGNORE INTO concept_aliases (concept_id, alias, slug)
+SELECT c.id, 'gender roles', 'gender-roles'
+FROM concepts c
+WHERE c.slug = 'gender';
+
+INSERT OR IGNORE INTO concept_aliases (concept_id, alias, slug)
 SELECT c.id, 'gender and power', 'gender-and-power'
 FROM concepts c
 WHERE c.slug = 'gender-politics';
