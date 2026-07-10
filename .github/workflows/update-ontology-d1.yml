@@ -1,0 +1,59 @@
+name: Update Ontology D1
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "ontology/source/concepts.csv"
+      - "ontology/scripts/generate_ontology_sql.py"
+      - ".github/workflows/update-ontology-d1.yml"
+
+jobs:
+  update-d1:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Generate ontology SQL
+        run: python ./ontology/scripts/generate_ontology_sql.py
+
+      - name: Execute concept upserts
+        run: npx wrangler d1 execute studio_practice_project --remote --file ./ontology/generated/004_concepts_generated.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Execute concept links
+        run: npx wrangler d1 execute studio_practice_project --remote --file ./ontology/generated/005_concept_links_generated.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Execute aliases
+        run: npx wrangler d1 execute studio_practice_project --remote --file ./ontology/generated/006_concept_aliases_generated.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Execute relationships
+        run: npx wrangler d1 execute studio_practice_project --remote --file ./ontology/generated/007_concept_relationships_generated.sql
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+
+      - name: Verify ontology counts
+        run: |
+          npx wrangler d1 execute studio_practice_project --remote --command "SELECT COUNT(*) AS concepts FROM concepts;"
+          npx wrangler d1 execute studio_practice_project --remote --command "SELECT COUNT(*) AS aliases FROM concept_aliases;"
+          npx wrangler d1 execute studio_practice_project --remote --command "SELECT COUNT(*) AS relationships FROM concept_relationships;"
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
