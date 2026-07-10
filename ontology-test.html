@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Ontology Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      margin: 2rem;
+      line-height: 1.5;
+      max-width: 900px;
+    }
+    .concept {
+      border-top: 1px solid #ddd;
+      padding: 1rem 0;
+    }
+    .slug {
+      color: #666;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>Observe & Document</h1>
+  <p>Testing concepts loaded from Cloudflare D1.</p>
+
+  <div id="concepts">Loading...</div>
+
+  <script>
+    async function loadConcepts() {
+      const container = document.getElementById("concepts");
+
+      try {
+        const response = await fetch("/api/concepts/observe-and-document");
+        const concepts = await response.json();
+
+        container.innerHTML = concepts.map(concept => `
+          <div class="concept">
+            <h2>${concept.name}</h2>
+            <div class="slug">${concept.slug}</div>
+            <p>${concept.description ?? ""}</p>
+          </div>
+        `).join("");
+      } catch (error) {
+        container.textContent = "Could not load concepts.";
+        console.error(error);
+      }
+    }
+
+    loadConcepts();
+  </script>
+</body>
+</html>
