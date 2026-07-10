@@ -41,8 +41,12 @@ concepts_sql = [
 
 for row in rows:
     concepts_sql.append(
-        "INSERT OR IGNORE INTO concepts (name, slug, description)\n"
-        f"VALUES ({q(row['name'])}, {q(row['slug'])}, {q(row['description'])});\n"
+        "INSERT INTO concepts (name, slug, description)\n"
+        f"VALUES ({q(row['name'])}, {q(row['slug'])}, {q(row['description'])})\n"
+        "ON CONFLICT(slug) DO UPDATE SET\n"
+        "  name = excluded.name,\n"
+        "  description = excluded.description,\n"
+        "  updated_at = CURRENT_TIMESTAMP;\n"
     )
 
 (OUT_DIR / "004_concepts_generated.sql").write_text("\n".join(concepts_sql), encoding="utf-8")
