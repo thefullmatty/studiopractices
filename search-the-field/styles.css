@@ -169,3 +169,68 @@ html, body { margin: 0; min-height: 100%; background: transparent; font-family: 
   .stage-inner { transform: scale(calc(100vw / 960.87)); }
   .tool-wrap { display: block; height: calc(965px * (100vw / 960.87)); overflow: hidden; }
 }
+/* Standalone responsive page */
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.tool-wrap {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+.stage {
+  position: relative;
+  width: 100%;
+  max-width: 960.87px;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.stage-inner {
+  position: relative;
+
+  /* Preserve the coordinate system used by the design */
+  width: 960.87px;
+  height: 965px;
+
+  /* Scale from the top centre of the browser */
+  transform-origin: top center;
+  left: 50%;
+  margin-left: -480.435px;
+}
+.search-input,
+.search-button,
+.category-button,
+.reset-button {
+  touch-action: manipulation;
+}
+
+@media screen and (max-width: 600px) {
+  .search-input {
+    /*
+      Prevents iPhones from zooming the whole browser
+      when the user taps into the search field.
+    */
+    font-size: 16px;
+  }
+
+  .search-button,
+  .category-button,
+  .reset-button {
+    cursor: pointer;
+  }
+}
